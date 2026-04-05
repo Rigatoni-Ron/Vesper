@@ -1,0 +1,472 @@
+/**
+ * Dark Mode Design System — CSS Custom Properties
+ *
+ * Auto-generated from semantic token definitions.
+ * Apply this stylesheet globally (e.g. in _app.tsx or main.css).
+ * All component styles should reference these variables exclusively.
+ *
+ * Usage:   color: var(--color-text-primary);
+ *          padding: var(--spacing-inset-md);
+ *          border-radius: var(--radius-card-md);
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ─── Base Reset & Root ────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: 16px;               /* 1rem baseline */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── Dark Mode Token Definitions ─────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+
+  /* ── Color: Backgrounds ────────────────────────────────────────────────── */
+  --color-bg-canvas:           #080808;
+  --color-bg-base:             #0f0f0f;
+  --color-bg-surface:          #141414;
+  --color-bg-elevated:         #1a1a1a;
+  --color-bg-overlay:          #222222;
+  --color-bg-inverse:          #f0f0f0;
+  --color-bg-hover:            rgba(255, 255, 255, 0.04);
+  --color-bg-active:           rgba(255, 255, 255, 0.08);
+  --color-bg-selected:         rgba(109, 40, 217, 0.12);
+  --color-bg-selection:        rgba(109, 40, 217, 0.30); /* text highlight selection */
+
+  /* ── Color: Borders ────────────────────────────────────────────────────── */
+  --color-border-subtlest:     #1a1a1a;
+  --color-border-subtle:       #2a2a2a;
+  --color-border-default:      #333333;
+  --color-border-strong:       #4a4a4a;
+  --color-border-inverse:      #c4c4c4;
+  --color-border-focus:        #c084fc;
+  --color-border-error:        #f43f5e;
+  --color-border-success:      #22c55e;
+  --color-border-warning:      #f59e0b;
+  --color-border-swatch:       rgba(255,255,255,0.06); /* faint white edge for colour chips on any surface */
+
+  /* ── Color: Text ───────────────────────────────────────────────────────── */
+  --color-text-primary:        #f0f0f0;
+  --color-text-secondary:      #a0a0a0;
+  --color-text-tertiary:       #777777;
+  --color-text-disabled:       #4a4a4a;
+  --color-text-inverse:        #0f0f0f;
+  --color-text-link:           #c084fc;
+  --color-text-link-hover:     #d8b4fe;
+  --color-text-error:          #fb7185;
+  --color-text-success:        #4ade80;
+  --color-text-warning:        #f99030;
+  --color-text-info:           #60a5fa;
+
+  /* ── Color: Icon ───────────────────────────────────────────────────────── */
+  --color-icon-primary:        #e3e3e3;
+  --color-icon-secondary:      #8c8c8c;
+  --color-icon-tertiary:       #575757;
+  --color-icon-disabled:       #3d3d3d;
+  --color-icon-inverse:        #141414;
+  --color-icon-error:          #fb7185;
+  --color-icon-success:        #4ade80;
+  --color-icon-warning:        #f99030;
+  --color-icon-info:           #60a5fa;
+  --color-icon-brand:          #c084fc;
+
+  /* ── Color: Primary CTA (Violet) ───────────────────────────────────────── */
+  /* Contrast vs #ffffff — bg: 7.10:1 AAA · hover: 5.70:1 AA · active: 8.98:1 AAA */
+  --color-primary-bg:          #6d28d9;
+  --color-primary-bg-hover:    #7c3aed;
+  --color-primary-bg-active:   #5b21b6;
+  --color-primary-bg-subtle:   rgba(109, 40, 217, 0.12);
+  --color-primary-bg-subtle-hover: rgba(109, 40, 217, 0.18);
+  --color-primary-fg:          #ffffff;
+  --color-primary-fg-subtle:   #c084fc;
+  --color-primary-border:      #6d28d9;
+  --color-primary-border-hover: #7c3aed;
+
+  /* ── Color: Destructive ────────────────────────────────────────────────── */
+  --color-destructive-bg:          #e11d48;
+  --color-destructive-bg-hover:    #f43f5e;
+  --color-destructive-bg-active:   #be123c;
+  --color-destructive-bg-subtle:   rgba(244, 63, 94, 0.12);
+  --color-destructive-bg-subtle-hover: rgba(244, 63, 94, 0.18);
+  --color-destructive-fg:          #ffffff;
+  --color-destructive-fg-subtle:   #fb7185;
+  --color-destructive-border:      #e11d48;
+  --color-destructive-border-hover: #f43f5e;
+
+  /* ── Color: Status ─────────────────────────────────────────────────────── */
+  --color-success-bg:          #16a34a;
+  --color-success-bg-subtle:   rgba(34, 197, 94, 0.12);
+  --color-success-fg:          #ffffff;
+  --color-success-fg-subtle:   #4ade80;
+  --color-success-border:      #16a34a;
+
+  --color-warning-bg:          #f77018;
+  --color-warning-bg-subtle:   rgba(247, 112, 24, 0.12);
+  --color-warning-fg:          #000000;
+  --color-warning-fg-subtle:   #f99030;
+  --color-warning-border:      #f77018;
+
+  --color-info-bg:             #2563eb;
+  --color-info-bg-subtle:      rgba(59, 130, 246, 0.12);
+  --color-info-fg:             #ffffff;
+  --color-info-fg-subtle:      #60a5fa;
+  --color-info-border:         #2563eb;
+
+  /* ── Color: Avatar Palette ──────────────────────────────────────────────── */
+  /* Five distinct hues for avatar initials — bg is the solid hue, fg is the text on top */
+  --color-avatar-a-bg: var(--color-primary-bg-active);   /* violet   */
+  --color-avatar-a-fg: var(--color-primary-fg);
+  --color-avatar-b-bg: var(--color-info-bg);              /* blue     */
+  --color-avatar-b-fg: var(--color-info-fg);
+  --color-avatar-c-bg: var(--color-success-bg);           /* green    */
+  --color-avatar-c-fg: var(--color-success-fg);
+  --color-avatar-d-bg: var(--color-warning-bg);           /* amber    */
+  --color-avatar-d-fg: var(--color-warning-fg);
+  --color-avatar-e-bg: var(--color-destructive-bg);       /* rose     */
+  --color-avatar-e-fg: var(--color-destructive-fg);
+
+  /* ── Color: Neutral Interactive ────────────────────────────────────────── */
+  --color-neutral-bg:              #1a1a1a;
+  --color-neutral-bg-hover:        #2a2a2a;
+  --color-neutral-bg-active:       #333333;
+  --color-neutral-bg-subtle:       rgba(255, 255, 255, 0.04);
+  --color-neutral-bg-subtle-hover: rgba(255, 255, 255, 0.08);
+  --color-neutral-fg:              #f0f0f0;
+  --color-neutral-fg-subtle:       #a0a0a0;
+  --color-neutral-border:          #333333;
+  --color-neutral-border-hover:    #575757;
+
+  /* ── Color: Code ───────────────────────────────────────────────────────── */
+  --color-code-bg:             #141414;
+  --color-code-bg-block:       #0f0f0f;
+  --color-code-border:         #222222;
+  --color-code-fg:             #d8b4fe;
+  --color-code-fg-punctuation: #777777;
+  --color-code-fg-keyword:     #c084fc;
+  --color-code-fg-string:      #86efac;
+  --color-code-fg-number:      #fcd34d;
+  --color-code-fg-comment:     #666666;
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  /* Primitive font stacks */
+  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:  "JetBrains Mono", "Fira Code", "Cascadia Code", "Roboto Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
+  /* Semantic font aliases — reference these in components, not the primitives */
+  --font-body:  var(--font-sans);   /* body copy, labels, UI text          */
+  --font-code:  var(--font-mono);   /* code blocks, inline code, terminals  */
+  /* Inline code font-size is relative (em-based) so it scales with context */
+  --text-code-inline: 0.9em;
+
+  /* Font Sizes */
+  --text-2xs:   0.625rem;    /*  10px */
+  --text-xs:    0.6875rem;   /*  11px */
+  --text-sm:    0.75rem;     /*  12px */
+  --text-md:    0.8125rem;   /*  13px */
+  --text-base:  0.875rem;    /*  14px */
+  --text-lg:    1rem;        /*  16px */
+  --text-xl:    1.125rem;    /*  18px */
+  --text-2xl:   1.25rem;     /*  20px */
+  --text-3xl:   1.5rem;      /*  24px */
+  --text-4xl:   1.875rem;    /*  30px */
+  --text-5xl:   2.25rem;     /*  36px */
+  --text-6xl:   3rem;        /*  48px */
+  --text-7xl:   3.75rem;     /*  60px */
+  --text-8xl:   4.5rem;      /*  72px */
+
+  /* Font Weights */
+  --weight-regular:    400;
+  --weight-medium:     500;
+  --weight-semibold:   600;
+  --weight-bold:       700;
+  --weight-extrabold:  800;
+
+  /* Line Heights */
+  --leading-none:      1;
+  --leading-tight:     1.2;
+  --leading-snug:      1.375;
+  --leading-normal:    1.5;
+  --leading-relaxed:   1.625;
+  --leading-loose:     2;
+
+  /* Letter Spacing */
+  --tracking-tighter:  -0.05em;
+  --tracking-tight:    -0.025em;
+  --tracking-normal:    0em;
+  --tracking-wide:      0.025em;
+  --tracking-wider:     0.05em;
+  --tracking-caps:      0.08em;
+
+  /* ── Mono UI Typography ─────────────────────────────────────────────────── */
+  /* Monospace type for UI chrome: token names, metadata, section markers.    */
+  /* Always paired with font-family: var(--font-mono). Three roles:           */
+  /*   label   → named identifiers  (medium weight, tight leading)            */
+  /*   caption → values & hex codes (regular weight, snug leading)            */
+  /*   overline→ section markers    (semibold, caps tracking, uppercase)       */
+
+  /* label·md — 13px / medium / normal tracking */
+  --mono-label-md-size:      var(--text-md);
+  --mono-label-md-weight:    var(--weight-medium);
+  --mono-label-md-leading:   var(--leading-none);
+  --mono-label-md-tracking:  var(--tracking-normal);
+
+  /* label·sm — 12px / medium / normal tracking */
+  --mono-label-sm-size:      var(--text-sm);
+  --mono-label-sm-weight:    var(--weight-medium);
+  --mono-label-sm-leading:   var(--leading-none);
+  --mono-label-sm-tracking:  var(--tracking-normal);
+
+  /* label·xs — 11px / medium / wide tracking */
+  --mono-label-xs-size:      var(--text-xs);
+  --mono-label-xs-weight:    var(--weight-medium);
+  --mono-label-xs-leading:   var(--leading-none);
+  --mono-label-xs-tracking:  var(--tracking-wide);
+
+  /* caption·md — 12px / regular / snug leading */
+  --mono-caption-md-size:    var(--text-sm);
+  --mono-caption-md-weight:  var(--weight-regular);
+  --mono-caption-md-leading: var(--leading-snug);
+  --mono-caption-md-tracking: var(--tracking-normal);
+
+  /* caption·sm — 11px / regular / snug leading */
+  --mono-caption-sm-size:    var(--text-xs);
+  --mono-caption-sm-weight:  var(--weight-regular);
+  --mono-caption-sm-leading: var(--leading-snug);
+  --mono-caption-sm-tracking: var(--tracking-normal);
+
+  /* caption·xs — 10px / regular / snug leading */
+  --mono-caption-xs-size:    var(--text-2xs);
+  --mono-caption-xs-weight:  var(--weight-regular);
+  --mono-caption-xs-leading: var(--leading-snug);
+  --mono-caption-xs-tracking: var(--tracking-normal);
+
+  /* overline·md — 11px / semibold / caps tracking / uppercase */
+  --mono-overline-md-size:    var(--text-xs);
+  --mono-overline-md-weight:  var(--weight-semibold);
+  --mono-overline-md-leading: var(--leading-none);
+  --mono-overline-md-tracking: var(--tracking-caps);
+
+  /* overline·sm — 10px / semibold / caps tracking / uppercase */
+  --mono-overline-sm-size:    var(--text-2xs);
+  --mono-overline-sm-weight:  var(--weight-semibold);
+  --mono-overline-sm-leading: var(--leading-none);
+  --mono-overline-sm-tracking: var(--tracking-caps);
+
+  /* ── Spacing ───────────────────────────────────────────────────────────── */
+  --space-px:    1px;
+  --space-0-5:   0.125rem;   /*  2px */
+  --space-0-75:  0.1875rem;  /*  3px — badge vertical padding, fine-grain insets */
+  --space-1:     0.25rem;    /*  4px */
+  --space-1-5:   0.375rem;   /*  6px */
+  --space-2:     0.5rem;     /*  8px */
+  --space-2-5:   0.625rem;   /*  10px */
+  --space-3:     0.75rem;    /*  12px */
+  --space-3-5:   0.875rem;   /*  14px */
+  --space-4:     1rem;       /*  16px */
+  --space-5:     1.25rem;    /*  20px */
+  --space-6:     1.5rem;     /*  24px */
+  --space-7:     1.75rem;    /*  28px */
+  --space-8:     2rem;       /*  32px */
+  --space-9:     2.25rem;    /*  36px */
+  --space-10:    2.5rem;     /*  40px */
+  --space-12:    3rem;       /*  48px */
+  --space-14:    3.5rem;     /*  56px */
+  --space-16:    4rem;       /*  64px */
+  --space-20:    5rem;       /*  80px */
+  --space-24:    6rem;       /*  96px */
+  --space-32:    8rem;       /*  128px */
+
+  /* Semantic Spacing Aliases */
+  --spacing-inset-xs:    var(--space-2);    /*  8px */
+  --spacing-inset-sm:    var(--space-3);    /*  12px */
+  --spacing-inset-md:    var(--space-4);    /*  16px */
+  --spacing-inset-lg:    var(--space-6);    /*  24px */
+  --spacing-inset-xl:    var(--space-8);    /*  32px */
+  --spacing-inset-2xl:   var(--space-12);   /*  48px */
+
+  --spacing-stack-2xs:   var(--space-0-5);  /*  2px */
+  --spacing-stack-xs:    var(--space-1);    /*  4px */
+  --spacing-stack-sm:    var(--space-2);    /*  8px */
+  --spacing-stack-md:    var(--space-3);    /*  12px */
+  --spacing-stack-lg:    var(--space-4);    /*  16px */
+  --spacing-stack-xl:    var(--space-6);    /*  24px */
+  --spacing-stack-2xl:   var(--space-8);    /*  32px */
+  --spacing-stack-3xl:   var(--space-12);   /*  48px */
+  --spacing-stack-4xl:   var(--space-16);   /*  64px */
+
+  --spacing-component-padding-xs:   var(--space-1);    /*  4px */
+  --spacing-component-padding-sm:   var(--space-1-5);  /*  6px */
+  --spacing-component-padding-md:   var(--space-2);    /*  8px */
+  --spacing-component-padding-lg:   var(--space-3);    /*  12px */
+  --spacing-component-gap-xs:       var(--space-1);    /*  4px */
+  --spacing-component-gap-sm:       var(--space-1-5);  /*  6px */
+  --spacing-component-gap-md:       var(--space-2);    /*  8px */
+
+  --spacing-hit-target-sm:   28px;
+  --spacing-hit-target-md:   32px;
+  --spacing-hit-target-lg:   36px;
+  --spacing-hit-target-xl:   40px;
+
+  /* ── Border Radius ─────────────────────────────────────────────────────── */
+  --radius-none:   0px;
+  --radius-xs:     2px;
+  --radius-sm:     4px;
+  --radius-md:     6px;
+  --radius-lg:     8px;
+  --radius-xl:     12px;
+  --radius-2xl:    16px;
+  --radius-3xl:    24px;
+  --radius-full:   9999px;
+
+  /* Semantic Radius Aliases */
+  --radius-button-sm:   var(--radius-sm);
+  --radius-button-md:   var(--radius-md);
+  --radius-button-lg:   var(--radius-lg);
+  --radius-button-pill: var(--radius-full);
+  --radius-input:       var(--radius-md);
+  --radius-badge:       var(--radius-sm);
+  --radius-badge-pill:  var(--radius-full);
+  --radius-card-sm:     var(--radius-md);
+  --radius-card-md:     var(--radius-lg);
+  --radius-card-lg:     var(--radius-xl);
+  --radius-dropdown:    var(--radius-lg);
+  --radius-tooltip:     var(--radius-sm);
+  --radius-popover:     var(--radius-lg);
+  --radius-modal:       var(--radius-xl);
+  --radius-sheet:       var(--radius-2xl);
+  --radius-avatar:      var(--radius-full);
+
+  /* ── Elevation / Shadows ───────────────────────────────────────────────── */
+  --shadow-xs:   0px 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm:   0px 1px 3px rgba(0, 0, 0, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.36);
+  --shadow-md:   0px 4px 8px rgba(0, 0, 0, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.36);
+  --shadow-lg:   0px 8px 16px rgba(0, 0, 0, 0.56), 0px 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-xl:   0px 16px 32px rgba(0, 0, 0, 0.64), 0px 8px 16px rgba(0, 0, 0, 0.48);
+  --shadow-2xl:  0px 24px 48px rgba(0, 0, 0, 0.72), 0px 12px 24px rgba(0, 0, 0, 0.56);
+  --shadow-none: none;
+
+  /* Inset */
+  --shadow-inset-sm: inset 0px 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-inset-md: inset 0px 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-inset-lg: inset 0px 4px 8px rgba(0, 0, 0, 0.6);
+
+  /* Glow */
+  --glow-lilac-sm: 0px 0px 10px rgba(109, 40, 217, 0.45);
+  --glow-lilac-md: 0px 0px 18px rgba(109, 40, 217, 0.5), 0px 0px 5px rgba(109, 40, 217, 0.55);
+  --glow-lilac-lg: 0px 0px 36px rgba(109, 40, 217, 0.55), 0px 0px 10px rgba(109, 40, 217, 0.65);
+
+  /* Semantic Shadow Aliases */
+  --shadow-surface-raised:   var(--shadow-sm);
+  --shadow-surface-floating: var(--shadow-md);
+  --shadow-dropdown:         var(--shadow-md);
+  --shadow-tooltip:          var(--shadow-md);
+  --shadow-popover:          var(--shadow-lg);
+  --shadow-modal:            var(--shadow-xl);
+  --shadow-command-palette:  var(--shadow-2xl);
+  --shadow-focus-ring:       var(--glow-lilac-sm);
+  --shadow-cta-hover:        var(--glow-lilac-md);
+  --shadow-input-focus:      var(--glow-lilac-sm);
+  --shadow-input-error:      0px 0px 8px rgba(244, 63, 94, 0.3);
+
+  /* ── Z-Index Scale ─────────────────────────────────────────────────────── */
+  --z-below:          -1;
+  --z-base:            0;
+  --z-raised:         10;
+  --z-dropdown:      100;
+  --z-sticky:        200;
+  --z-overlay:       300;
+  --z-modal:         400;
+  --z-popover:       500;
+  --z-tooltip:       600;
+  --z-toast:         700;
+  --z-command:       800;
+  --z-max:          9999;
+
+  /* ── Transition ────────────────────────────────────────────────────────── */
+  --duration-instant:  50ms;
+  --duration-fast:     100ms;
+  --duration-normal:   150ms;
+  --duration-moderate: 200ms;
+  --duration-slow:     300ms;
+  --duration-slower:   500ms;
+
+  --ease-default:      cubic-bezier(0.16, 1, 0.3, 1);   /* expo out — snappy UI */
+  --ease-in:           cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:          cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:       cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:       cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot */
+
+  --transition-colors: color var(--duration-fast) var(--ease-default),
+                       background-color var(--duration-fast) var(--ease-default),
+                       border-color var(--duration-fast) var(--ease-default),
+                       box-shadow var(--duration-fast) var(--ease-default);
+  --transition-transform: transform var(--duration-normal) var(--ease-default);
+  --transition-opacity:   opacity var(--duration-fast) var(--ease-default);
+  --transition-all:       all var(--duration-normal) var(--ease-default);
+}
+
+/* ─── Base Styles ──────────────────────────────────────────────────────────── */
+body {
+  font-family:      var(--font-sans);
+  font-size:        var(--text-base);        /* 14px — Vercel-style default */
+  font-weight:      var(--weight-regular);
+  line-height:      var(--leading-normal);
+  letter-spacing:   var(--tracking-normal);
+  color:            var(--color-text-primary);
+  background-color: var(--color-bg-base);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight:   var(--weight-semibold);
+  line-height:   var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color:         var(--color-text-primary);
+}
+
+/* Links */
+a {
+  color:           var(--color-text-link);
+  text-decoration: none;
+  transition:      var(--transition-colors);
+}
+a:hover {
+  color: var(--color-text-link-hover);
+}
+
+/* Focus visible */
+:focus-visible {
+  outline:        2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  box-shadow:     var(--shadow-focus-ring);
+}
+
+/* Code */
+code, kbd, samp, pre {
+  font-family: var(--font-code);
+  font-size:   var(--text-code-inline);
+}
+
+code:not(pre code) {
+  background:    var(--color-code-bg);
+  color:         var(--color-code-fg);
+  border:        1px solid var(--color-code-border);
+  border-radius: var(--radius-xs);
+  padding:       0.1em 0.35em;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-bg-selection);
+  color:      var(--color-text-primary);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar         { width: 6px; height: 6px; }
+::-webkit-scrollbar-track   { background: var(--color-bg-surface); }
+::-webkit-scrollbar-thumb   { background: var(--color-border-strong); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-border-hover); }
