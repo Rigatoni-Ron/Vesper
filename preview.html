@@ -925,12 +925,18 @@
       border-radius: var(--radius-xs); font-family: var(--font-mono);
       font-size: var(--mono-caption-xs-size); color: var(--color-text-disabled); line-height: 1;
     }
+    /* Suppress browser native clear button on search inputs */
+    input[type=search]::-webkit-search-cancel-button,
+    input[type=search]::-webkit-search-decoration { display: none; }
+
     .search-results {
-      margin-top: var(--space-1);
+      position: absolute; top: calc(100% + var(--space-1)); left: 0; width: 100%;
       background: var(--color-bg-overlay); border: 1px solid var(--color-border-default);
       border-radius: var(--radius-dropdown); box-shadow: var(--shadow-dropdown);
-      overflow: hidden;
+      overflow: hidden; z-index: var(--z-dropdown);
+      display: none;
     }
+    .search-results.open { display: block; }
     .search-result-item {
       display: flex; align-items: center; gap: var(--space-3);
       padding: var(--space-2) var(--space-3);
@@ -2532,15 +2538,15 @@
           <input class="search-input" type="search" value="acme" id="search-demo" autocomplete="off" />
           <div class="search-results open" id="search-results-demo">
             <div class="search-result-item active">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;"><rect x="2" y="2" width="12" height="12" rx="2"/></svg>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;color:var(--color-icon-tertiary)"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h3.379a1.5 1.5 0 0 1 1.06.44l.622.621A1.5 1.5 0 0 0 9.62 5.5H12.5A1.5 1.5 0 0 1 14 7v4.5A1.5 1.5 0 0 1 12.5 13h-9A1.5 1.5 0 0 1 2 11.5v-6Z"/></svg>
               acme-dashboard
             </div>
             <div class="search-result-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;"><rect x="2" y="2" width="12" height="12" rx="2"/></svg>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;color:var(--color-icon-tertiary)"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h3.379a1.5 1.5 0 0 1 1.06.44l.622.621A1.5 1.5 0 0 0 9.62 5.5H12.5A1.5 1.5 0 0 1 14 7v4.5A1.5 1.5 0 0 1 12.5 13h-9A1.5 1.5 0 0 1 2 11.5v-6Z"/></svg>
               acme-api
             </div>
             <div class="search-result-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;"><rect x="2" y="2" width="12" height="12" rx="2"/></svg>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;color:var(--color-icon-tertiary)"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h3.379a1.5 1.5 0 0 1 1.06.44l.622.621A1.5 1.5 0 0 0 9.62 5.5H12.5A1.5 1.5 0 0 1 14 7v4.5A1.5 1.5 0 0 1 12.5 13h-9A1.5 1.5 0 0 1 2 11.5v-6Z"/></svg>
               acme-landing
             </div>
           </div>
