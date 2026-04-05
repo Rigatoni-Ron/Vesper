@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vesper — Design System</title>
   <link rel="stylesheet" href="./css/variables.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
 
     /* ── Layout ───────────────────────────────────────────────────────────── */
@@ -1533,6 +1534,73 @@
       text-transform: uppercase;
     }
 
+    /* ── Icons Tab ───────────────────────────────────────────────────────── */
+    .icons-toolbar {
+      display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
+      margin-bottom: var(--space-5);
+    }
+    .icons-search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 320px; }
+    .icons-search-wrap svg { position: absolute; left: var(--space-3); top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--color-icon-secondary); pointer-events: none; }
+    .icons-search { width: 100%; height: 36px; padding: 0 var(--space-3) 0 calc(var(--space-3) + 14px + var(--space-2)); background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-input); font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-primary); outline: none; }
+    .icons-search::placeholder { color: var(--color-text-tertiary); }
+    .icons-search:focus { border-color: var(--color-border-focus); box-shadow: var(--shadow-input-focus); }
+    .icons-size-group { display: flex; gap: var(--space-1); }
+    .icon-size-btn {
+      height: 32px; padding: 0 var(--space-3);
+      background: var(--color-bg-surface); border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-button-sm); font-family: var(--font-body); font-size: var(--text-sm);
+      color: var(--color-text-secondary); cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default);
+    }
+    .icon-size-btn:hover { background: var(--color-bg-hover); color: var(--color-text-primary); }
+    .icon-size-btn.active { background: var(--color-primary-bg-active); border-color: var(--color-primary-border); color: var(--color-primary-fg); }
+    .icons-category-group { display: flex; gap: var(--space-1); flex-wrap: wrap; margin-bottom: var(--space-4); }
+    .icon-cat-btn {
+      height: 28px; padding: 0 var(--space-2-5);
+      background: transparent; border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-full); font-family: var(--font-body); font-size: var(--text-xs);
+      color: var(--color-text-tertiary); cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default);
+    }
+    .icon-cat-btn:hover { background: var(--color-bg-hover); color: var(--color-text-secondary); border-color: var(--color-border-default); }
+    .icon-cat-btn.active { background: var(--color-bg-active); border-color: var(--color-border-strong); color: var(--color-text-primary); }
+    .icons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+      gap: var(--space-2);
+    }
+    .icon-card {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: var(--space-2); padding: var(--space-3) var(--space-2);
+      background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-card-sm); cursor: pointer; user-select: none;
+      transition: background var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
+      min-height: 80px;
+    }
+    .icon-card:hover { background: var(--color-bg-hover); border-color: var(--color-border-default); }
+    .icon-card.copied { border-color: var(--color-primary-border); box-shadow: var(--glow-lilac-sm); }
+    .icon-card svg { color: var(--color-icon-primary); flex-shrink: 0; }
+    .icon-card-name {
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--color-text-tertiary); text-align: center;
+      line-height: 1.3; word-break: break-all;
+      max-width: 100%;
+    }
+    .icons-empty {
+      grid-column: 1 / -1; padding: var(--space-12) var(--space-4);
+      text-align: center; color: var(--color-text-tertiary); font-size: var(--text-sm);
+    }
+    .icon-copy-toast {
+      position: fixed; bottom: var(--space-6); left: 50%; transform: translateX(-50%);
+      background: var(--color-bg-overlay); border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-card-sm); padding: var(--space-2) var(--space-4);
+      font-size: var(--text-sm); color: var(--color-text-primary);
+      box-shadow: var(--shadow-dropdown); z-index: var(--z-tooltip);
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--duration-fast) var(--ease-default);
+    }
+    .icon-copy-toast.show { opacity: 1; }
+
   </style>
 </head>
 <body>
@@ -1570,6 +1638,10 @@
     <button class="tab-btn" data-tab="dataviz" role="tab" aria-selected="false">
       Data Viz
       <span class="tab-badge">5</span>
+    </button>
+    <button class="tab-btn" data-tab="icons" role="tab" aria-selected="false">
+      Icons
+      <span class="tab-badge" id="icon-tab-count">—</span>
     </button>
   </nav>
 
@@ -3334,6 +3406,38 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ICONS
+  ═════════════════════════════════════════════════════════════════════════ -->
+  <section class="section" data-tab="icons">
+    <div class="section-header">
+      <h2 class="section-title">Icon Library</h2>
+      <p class="section-desc">Lucide icons — 2px stroke, <code>currentColor</code>, fully token-compatible. Click any icon to copy its name.</p>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="icons-toolbar">
+      <div class="icons-search-wrap">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        <input class="icons-search" type="text" placeholder="Search icons…" id="icon-search" autocomplete="off" />
+      </div>
+      <div class="icons-size-group">
+        <button class="icon-size-btn" data-size="16">16px</button>
+        <button class="icon-size-btn active" data-size="24">24px</button>
+        <button class="icon-size-btn" data-size="32">32px</button>
+      </div>
+    </div>
+
+    <!-- Category pills -->
+    <div class="icons-category-group" id="icon-categories"></div>
+
+    <!-- Grid -->
+    <div class="icons-grid" id="icons-grid"></div>
+  </section>
+
+  <!-- Copy feedback toast -->
+  <div class="icon-copy-toast" id="icon-copy-toast">Copied!</div>
+
   <!-- Footer -->
   <footer style="padding:var(--space-8) 0;border-top:1px solid var(--color-border-subtle);display:flex;align-items:center;justify-content:space-between;">
     <div class="mono-caption-sm" style="color:var(--color-text-disabled);">vesper · v1.0</div>
@@ -4171,6 +4275,424 @@
     searchDemo.addEventListener('focus', () => searchResultsDemo.classList.add('open'));
     searchDemo.addEventListener('blur', () => setTimeout(() => searchResultsDemo.classList.remove('open'), 150));
   }
+
+  // ── Icons Tab ─────────────────────────────────────────────────────────────
+  (function initIconLibrary() {
+    // Wait for Lucide to be available
+    if (typeof lucide === 'undefined') return;
+
+    // Icon catalogue with categories
+    const ICON_CATALOGUE = [
+      // Arrows & Navigation
+      { name:'arrow-up',           cat:'Arrows'      },
+      { name:'arrow-down',         cat:'Arrows'      },
+      { name:'arrow-left',         cat:'Arrows'      },
+      { name:'arrow-right',        cat:'Arrows'      },
+      { name:'arrow-up-right',     cat:'Arrows'      },
+      { name:'arrow-up-left',      cat:'Arrows'      },
+      { name:'arrow-down-right',   cat:'Arrows'      },
+      { name:'arrow-down-left',    cat:'Arrows'      },
+      { name:'chevron-up',         cat:'Arrows'      },
+      { name:'chevron-down',       cat:'Arrows'      },
+      { name:'chevron-left',       cat:'Arrows'      },
+      { name:'chevron-right',      cat:'Arrows'      },
+      { name:'chevrons-up-down',   cat:'Arrows'      },
+      { name:'chevrons-left-right',cat:'Arrows'      },
+      { name:'move',               cat:'Arrows'      },
+      { name:'move-up-right',      cat:'Arrows'      },
+      { name:'corner-up-left',     cat:'Arrows'      },
+      { name:'corner-up-right',    cat:'Arrows'      },
+      { name:'undo',               cat:'Arrows'      },
+      { name:'redo',               cat:'Arrows'      },
+      { name:'refresh-cw',         cat:'Arrows'      },
+      { name:'refresh-ccw',        cat:'Arrows'      },
+      { name:'rotate-cw',          cat:'Arrows'      },
+      { name:'rotate-ccw',         cat:'Arrows'      },
+      // Layout & UI
+      { name:'layout-dashboard',   cat:'Layout'      },
+      { name:'layout-grid',        cat:'Layout'      },
+      { name:'layout-list',        cat:'Layout'      },
+      { name:'layout-template',    cat:'Layout'      },
+      { name:'panel-left',         cat:'Layout'      },
+      { name:'panel-right',        cat:'Layout'      },
+      { name:'panel-top',          cat:'Layout'      },
+      { name:'panel-bottom',       cat:'Layout'      },
+      { name:'sidebar',            cat:'Layout'      },
+      { name:'columns',            cat:'Layout'      },
+      { name:'rows',               cat:'Layout'      },
+      { name:'table',              cat:'Layout'      },
+      { name:'table-2',            cat:'Layout'      },
+      { name:'grid',               cat:'Layout'      },
+      { name:'grip',               cat:'Layout'      },
+      { name:'grip-vertical',      cat:'Layout'      },
+      { name:'menu',               cat:'Layout'      },
+      { name:'menu-square',        cat:'Layout'      },
+      { name:'list',               cat:'Layout'      },
+      { name:'list-ordered',       cat:'Layout'      },
+      { name:'align-left',         cat:'Layout'      },
+      { name:'align-center',       cat:'Layout'      },
+      { name:'align-right',        cat:'Layout'      },
+      { name:'align-justify',      cat:'Layout'      },
+      { name:'maximize',           cat:'Layout'      },
+      { name:'minimize',           cat:'Layout'      },
+      { name:'maximize-2',         cat:'Layout'      },
+      { name:'minimize-2',         cat:'Layout'      },
+      { name:'expand',             cat:'Layout'      },
+      { name:'shrink',             cat:'Layout'      },
+      // Files & Folders
+      { name:'file',               cat:'Files'       },
+      { name:'file-text',          cat:'Files'       },
+      { name:'file-code',          cat:'Files'       },
+      { name:'file-json',          cat:'Files'       },
+      { name:'file-plus',          cat:'Files'       },
+      { name:'file-minus',         cat:'Files'       },
+      { name:'file-check',         cat:'Files'       },
+      { name:'file-x',             cat:'Files'       },
+      { name:'file-edit',          cat:'Files'       },
+      { name:'file-search',        cat:'Files'       },
+      { name:'files',              cat:'Files'       },
+      { name:'folder',             cat:'Files'       },
+      { name:'folder-open',        cat:'Files'       },
+      { name:'folder-plus',        cat:'Files'       },
+      { name:'folder-minus',       cat:'Files'       },
+      { name:'folder-check',       cat:'Files'       },
+      { name:'folder-x',           cat:'Files'       },
+      { name:'folder-git',         cat:'Files'       },
+      { name:'paperclip',          cat:'Files'       },
+      { name:'clipboard',          cat:'Files'       },
+      { name:'clipboard-check',    cat:'Files'       },
+      { name:'clipboard-copy',     cat:'Files'       },
+      { name:'clipboard-list',     cat:'Files'       },
+      { name:'archive',            cat:'Files'       },
+      // Communication
+      { name:'mail',               cat:'Communication'},
+      { name:'mail-open',          cat:'Communication'},
+      { name:'mail-check',         cat:'Communication'},
+      { name:'mail-plus',          cat:'Communication'},
+      { name:'mail-x',             cat:'Communication'},
+      { name:'inbox',              cat:'Communication'},
+      { name:'send',               cat:'Communication'},
+      { name:'message-circle',     cat:'Communication'},
+      { name:'message-square',     cat:'Communication'},
+      { name:'messages-square',    cat:'Communication'},
+      { name:'reply',              cat:'Communication'},
+      { name:'reply-all',          cat:'Communication'},
+      { name:'forward',            cat:'Communication'},
+      { name:'at-sign',            cat:'Communication'},
+      { name:'phone',              cat:'Communication'},
+      { name:'phone-call',         cat:'Communication'},
+      { name:'phone-off',          cat:'Communication'},
+      { name:'voicemail',          cat:'Communication'},
+      { name:'bell',               cat:'Communication'},
+      { name:'bell-off',           cat:'Communication'},
+      { name:'bell-ring',          cat:'Communication'},
+      { name:'rss',                cat:'Communication'},
+      // Data & Charts
+      { name:'bar-chart',          cat:'Data'        },
+      { name:'bar-chart-2',        cat:'Data'        },
+      { name:'bar-chart-3',        cat:'Data'        },
+      { name:'bar-chart-4',        cat:'Data'        },
+      { name:'bar-chart-horizontal', cat:'Data'      },
+      { name:'line-chart',         cat:'Data'        },
+      { name:'area-chart',         cat:'Data'        },
+      { name:'pie-chart',          cat:'Data'        },
+      { name:'scatter-chart',      cat:'Data'        },
+      { name:'trending-up',        cat:'Data'        },
+      { name:'trending-down',      cat:'Data'        },
+      { name:'activity',           cat:'Data'        },
+      { name:'gauge',              cat:'Data'        },
+      { name:'percent',            cat:'Data'        },
+      { name:'sigma',              cat:'Data'        },
+      { name:'hash',               cat:'Data'        },
+      { name:'database',           cat:'Data'        },
+      { name:'server',             cat:'Data'        },
+      { name:'hard-drive',         cat:'Data'        },
+      { name:'cpu',                cat:'Data'        },
+      { name:'memory-stick',       cat:'Data'        },
+      // Actions
+      { name:'plus',               cat:'Actions'     },
+      { name:'minus',              cat:'Actions'     },
+      { name:'x',                  cat:'Actions'     },
+      { name:'check',              cat:'Actions'     },
+      { name:'check-check',        cat:'Actions'     },
+      { name:'search',             cat:'Actions'     },
+      { name:'filter',             cat:'Actions'     },
+      { name:'sort-asc',           cat:'Actions'     },
+      { name:'sort-desc',          cat:'Actions'     },
+      { name:'download',           cat:'Actions'     },
+      { name:'upload',             cat:'Actions'     },
+      { name:'share',              cat:'Actions'     },
+      { name:'share-2',            cat:'Actions'     },
+      { name:'copy',               cat:'Actions'     },
+      { name:'scissors',           cat:'Actions'     },
+      { name:'trash',              cat:'Actions'     },
+      { name:'trash-2',            cat:'Actions'     },
+      { name:'edit',               cat:'Actions'     },
+      { name:'edit-2',             cat:'Actions'     },
+      { name:'edit-3',             cat:'Actions'     },
+      { name:'pen',                cat:'Actions'     },
+      { name:'pen-line',           cat:'Actions'     },
+      { name:'pencil',             cat:'Actions'     },
+      { name:'save',               cat:'Actions'     },
+      { name:'bookmark',           cat:'Actions'     },
+      { name:'bookmark-plus',      cat:'Actions'     },
+      { name:'bookmark-check',     cat:'Actions'     },
+      { name:'star',               cat:'Actions'     },
+      { name:'heart',              cat:'Actions'     },
+      { name:'thumbs-up',          cat:'Actions'     },
+      { name:'thumbs-down',        cat:'Actions'     },
+      { name:'flag',               cat:'Actions'     },
+      { name:'tag',                cat:'Actions'     },
+      { name:'tags',               cat:'Actions'     },
+      { name:'link',               cat:'Actions'     },
+      { name:'link-2',             cat:'Actions'     },
+      { name:'unlink',             cat:'Actions'     },
+      { name:'external-link',      cat:'Actions'     },
+      { name:'log-in',             cat:'Actions'     },
+      { name:'log-out',            cat:'Actions'     },
+      // Media
+      { name:'play',               cat:'Media'       },
+      { name:'pause',              cat:'Media'       },
+      { name:'stop-circle',        cat:'Media'       },
+      { name:'skip-back',          cat:'Media'       },
+      { name:'skip-forward',       cat:'Media'       },
+      { name:'rewind',             cat:'Media'       },
+      { name:'fast-forward',       cat:'Media'       },
+      { name:'volume',             cat:'Media'       },
+      { name:'volume-1',           cat:'Media'       },
+      { name:'volume-2',           cat:'Media'       },
+      { name:'volume-x',           cat:'Media'       },
+      { name:'mic',                cat:'Media'       },
+      { name:'mic-off',            cat:'Media'       },
+      { name:'camera',             cat:'Media'       },
+      { name:'camera-off',         cat:'Media'       },
+      { name:'video',              cat:'Media'       },
+      { name:'video-off',          cat:'Media'       },
+      { name:'image',              cat:'Media'       },
+      { name:'images',             cat:'Media'       },
+      { name:'film',               cat:'Media'       },
+      { name:'music',              cat:'Media'       },
+      { name:'music-2',            cat:'Media'       },
+      { name:'headphones',         cat:'Media'       },
+      { name:'radio',              cat:'Media'       },
+      { name:'tv',                 cat:'Media'       },
+      { name:'monitor',            cat:'Media'       },
+      { name:'monitor-play',       cat:'Media'       },
+      // Status & Feedback
+      { name:'info',               cat:'Status'      },
+      { name:'circle-help',        cat:'Status'      },
+      { name:'alert-circle',       cat:'Status'      },
+      { name:'alert-triangle',     cat:'Status'      },
+      { name:'alert-octagon',      cat:'Status'      },
+      { name:'check-circle',       cat:'Status'      },
+      { name:'check-circle-2',     cat:'Status'      },
+      { name:'x-circle',           cat:'Status'      },
+      { name:'x-octagon',          cat:'Status'      },
+      { name:'ban',                cat:'Status'      },
+      { name:'circle',             cat:'Status'      },
+      { name:'circle-dot',         cat:'Status'      },
+      { name:'dot',                cat:'Status'      },
+      { name:'loader',             cat:'Status'      },
+      { name:'loader-2',           cat:'Status'      },
+      { name:'hourglass',          cat:'Status'      },
+      { name:'timer',              cat:'Status'      },
+      { name:'clock',              cat:'Status'      },
+      { name:'clock-2',            cat:'Status'      },
+      { name:'badge-check',        cat:'Status'      },
+      { name:'badge-alert',        cat:'Status'      },
+      { name:'badge-x',            cat:'Status'      },
+      { name:'badge-info',         cat:'Status'      },
+      { name:'shield',             cat:'Status'      },
+      { name:'shield-check',       cat:'Status'      },
+      { name:'shield-alert',       cat:'Status'      },
+      { name:'shield-off',         cat:'Status'      },
+      { name:'lock',               cat:'Status'      },
+      { name:'lock-open',          cat:'Status'      },
+      { name:'unlock',             cat:'Status'      },
+      { name:'key',                cat:'Status'      },
+      // People & Identity
+      { name:'user',               cat:'People'      },
+      { name:'user-plus',          cat:'People'      },
+      { name:'user-minus',         cat:'People'      },
+      { name:'user-check',         cat:'People'      },
+      { name:'user-x',             cat:'People'      },
+      { name:'users',              cat:'People'      },
+      { name:'users-2',            cat:'People'      },
+      { name:'user-circle',        cat:'People'      },
+      { name:'user-circle-2',      cat:'People'      },
+      { name:'contact',            cat:'People'      },
+      { name:'id-card',            cat:'People'      },
+      // Settings & Dev
+      { name:'settings',           cat:'Settings'    },
+      { name:'settings-2',         cat:'Settings'    },
+      { name:'sliders',            cat:'Settings'    },
+      { name:'sliders-horizontal', cat:'Settings'    },
+      { name:'toggle-left',        cat:'Settings'    },
+      { name:'toggle-right',       cat:'Settings'    },
+      { name:'switch-camera',      cat:'Settings'    },
+      { name:'code',               cat:'Settings'    },
+      { name:'code-2',             cat:'Settings'    },
+      { name:'terminal',           cat:'Settings'    },
+      { name:'git-branch',         cat:'Settings'    },
+      { name:'git-commit',         cat:'Settings'    },
+      { name:'git-merge',          cat:'Settings'    },
+      { name:'git-pull-request',   cat:'Settings'    },
+      { name:'github',             cat:'Settings'    },
+      { name:'package',            cat:'Settings'    },
+      { name:'package-plus',       cat:'Settings'    },
+      { name:'box',                cat:'Settings'    },
+      { name:'layers',             cat:'Settings'    },
+      { name:'component',          cat:'Settings'    },
+      { name:'blocks',             cat:'Settings'    },
+      { name:'plug',               cat:'Settings'    },
+      { name:'plug-2',             cat:'Settings'    },
+      { name:'webhook',            cat:'Settings'    },
+      { name:'api',                cat:'Settings'    },
+      // Nature & Places
+      { name:'globe',              cat:'Places'      },
+      { name:'globe-2',            cat:'Places'      },
+      { name:'map',                cat:'Places'      },
+      { name:'map-pin',            cat:'Places'      },
+      { name:'navigation',         cat:'Places'      },
+      { name:'navigation-2',       cat:'Places'      },
+      { name:'compass',            cat:'Places'      },
+      { name:'home',               cat:'Places'      },
+      { name:'building',           cat:'Places'      },
+      { name:'building-2',         cat:'Places'      },
+      { name:'store',              cat:'Places'      },
+      { name:'landmark',           cat:'Places'      },
+      { name:'tree',               cat:'Places'      },
+      { name:'tree-pine',          cat:'Places'      },
+      { name:'sun',                cat:'Places'      },
+      { name:'moon',               cat:'Places'      },
+      { name:'cloud',              cat:'Places'      },
+      { name:'cloud-rain',         cat:'Places'      },
+      { name:'wind',               cat:'Places'      },
+      { name:'snowflake',          cat:'Places'      },
+      { name:'flame',              cat:'Places'      },
+      { name:'droplets',           cat:'Places'      },
+    ];
+
+    const categories = ['All', ...new Set(ICON_CATALOGUE.map(i => i.cat))];
+    let activeCategory = 'All';
+    let activeSize = 24;
+    let searchQuery = '';
+    let copyTimer = null;
+
+    const grid       = document.getElementById('icons-grid');
+    const catGroup   = document.getElementById('icon-categories');
+    const searchInput= document.getElementById('icon-search');
+    const copyToast  = document.getElementById('icon-copy-toast');
+    const tabCount   = document.getElementById('icon-tab-count');
+
+    if (!grid || !catGroup) return;
+
+    // Update tab badge
+    tabCount.textContent = ICON_CATALOGUE.length;
+
+    // Build category pills
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'icon-cat-btn' + (cat === 'All' ? ' active' : '');
+      btn.textContent = cat;
+      btn.addEventListener('click', () => {
+        activeCategory = cat;
+        catGroup.querySelectorAll('.icon-cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGrid();
+      });
+      catGroup.appendChild(btn);
+    });
+
+    // Size switcher
+    document.querySelectorAll('.icon-size-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeSize = +btn.dataset.size;
+        document.querySelectorAll('.icon-size-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGrid();
+      });
+    });
+
+    // Search
+    searchInput.addEventListener('input', () => {
+      searchQuery = searchInput.value.toLowerCase().trim();
+      renderGrid();
+    });
+
+    function showCopyToast(name) {
+      copyToast.textContent = `Copied "${name}"`;
+      copyToast.classList.add('show');
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => copyToast.classList.remove('show'), 1800);
+    }
+
+    function renderGrid() {
+      const filtered = ICON_CATALOGUE.filter(icon => {
+        const matchCat  = activeCategory === 'All' || icon.cat === activeCategory;
+        const matchSearch = !searchQuery || icon.name.includes(searchQuery);
+        return matchCat && matchSearch;
+      });
+
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="icons-empty">No icons match your search.</div>';
+        return;
+      }
+
+      filtered.forEach(icon => {
+        // Try to get the icon creator from lucide
+        const iconData = lucide.icons[toCamelCase(icon.name)];
+        if (!iconData) return;
+
+        const card = document.createElement('div');
+        card.className = 'icon-card';
+        card.title = icon.name;
+
+        // iconData is an array of [tag, attrs] pairs
+        const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svgEl.setAttribute('width', activeSize);
+        svgEl.setAttribute('height', activeSize);
+        svgEl.setAttribute('viewBox', '0 0 24 24');
+        svgEl.setAttribute('fill', 'none');
+        svgEl.setAttribute('stroke', 'currentColor');
+        svgEl.setAttribute('stroke-width', '2');
+        svgEl.setAttribute('stroke-linecap', 'round');
+        svgEl.setAttribute('stroke-linejoin', 'round');
+        iconData.forEach(([tag, attrs]) => {
+          const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+          Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+          svgEl.appendChild(el);
+        });
+
+        const label = document.createElement('div');
+        label.className = 'icon-card-name';
+        label.textContent = icon.name;
+
+        card.appendChild(svgEl);
+        card.appendChild(label);
+
+        card.addEventListener('click', () => {
+          navigator.clipboard.writeText(icon.name).catch(() => {});
+          card.classList.add('copied');
+          setTimeout(() => card.classList.remove('copied'), 1000);
+          showCopyToast(icon.name);
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    function toCamelCase(str) {
+      return str.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase())
+                .replace(/^(.)/, c => c.toUpperCase());
+    }
+
+    // Initial render
+    renderGrid();
+  })();
+
 </script>
 
 </body>
