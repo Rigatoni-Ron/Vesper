@@ -35,8 +35,8 @@ html {
   --color-bg-inverse:          #f0f0f0;
   --color-bg-hover:            rgba(255, 255, 255, 0.04);
   --color-bg-active:           rgba(255, 255, 255, 0.08);
-  --color-bg-selected:         rgba(109, 40, 217, 0.12);
-  --color-bg-selection:        rgba(109, 40, 217, 0.30); /* text highlight selection */
+  --color-bg-selected:         rgba(92, 77, 208, 0.12);
+  --color-bg-selection:        rgba(92, 77, 208, 0.30); /* text highlight selection */
 
   /* ── Color: Borders ────────────────────────────────────────────────────── */
   --color-border-subtlest:     #1a1a1a;
@@ -44,10 +44,10 @@ html {
   --color-border-default:      #333333;
   --color-border-strong:       #4a4a4a;
   --color-border-inverse:      #c4c4c4;
-  --color-border-focus:        #c084fc;
-  --color-border-error:        #f43f5e;
-  --color-border-success:      #22c55e;
-  --color-border-warning:      #f59e0b;
+  --color-border-focus:        #c0b8fc;
+  --color-border-error:        #ef3d59;
+  --color-border-success:      #22b255;
+  --color-border-warning:      #e07c00;
   --color-border-swatch:       rgba(255,255,255,0.06); /* faint white edge for colour chips on any surface */
 
   /* ── Color: Text ───────────────────────────────────────────────────────── */
@@ -56,12 +56,12 @@ html {
   --color-text-tertiary:       #777777;
   --color-text-disabled:       #4a4a4a;
   --color-text-inverse:        #0f0f0f;
-  --color-text-link:           #c084fc;
-  --color-text-link-hover:     #d8b4fe;
-  --color-text-error:          #fb7185;
-  --color-text-success:        #4ade80;
-  --color-text-warning:        #f99030;
-  --color-text-info:           #60a5fa;
+  --color-text-link:           #c0b8fc;
+  --color-text-link-hover:     #dbd6fd;
+  --color-text-error:          #f87182;
+  --color-text-success:        #4dd47a;
+  --color-text-warning:        #ed8420;
+  --color-text-info:           #5a9ef4;
 
   /* ── Color: Icon ───────────────────────────────────────────────────────── */
   --color-icon-primary:        #e3e3e3;
@@ -69,53 +69,53 @@ html {
   --color-icon-tertiary:       #575757;
   --color-icon-disabled:       #3d3d3d;
   --color-icon-inverse:        #141414;
-  --color-icon-error:          #fb7185;
-  --color-icon-success:        #4ade80;
-  --color-icon-warning:        #f99030;
-  --color-icon-info:           #60a5fa;
-  --color-icon-brand:          #c084fc;
+  --color-icon-error:          #f87182;
+  --color-icon-success:        #4dd47a;
+  --color-icon-warning:        #ed8420;
+  --color-icon-info:           #5a9ef4;
+  --color-icon-brand:          #c0b8fc;
 
-  /* ── Color: Primary CTA (Violet) ───────────────────────────────────────── */
-  /* Contrast vs #ffffff — bg: 7.10:1 AAA · hover: 5.70:1 AA · active: 8.98:1 AAA */
-  --color-primary-bg:          #6d28d9;
-  --color-primary-bg-hover:    #7c3aed;
-  --color-primary-bg-active:   #5b21b6;
-  --color-primary-bg-subtle:   rgba(109, 40, 217, 0.12);
-  --color-primary-bg-subtle-hover: rgba(109, 40, 217, 0.18);
+  /* ── Color: Primary CTA (Iris) ─────────────────────────────────────────── */
+  /* Contrast vs #ffffff — bg: 5.81:1 AA · hover: 4.52:1 AA · active: 7.10:1 AAA */
+  --color-primary-bg:          #5c4dd0;
+  --color-primary-bg-hover:    #6e5fe8;
+  --color-primary-bg-active:   #4b3faf;
+  --color-primary-bg-subtle:   rgba(92, 77, 208, 0.12);
+  --color-primary-bg-subtle-hover: rgba(92, 77, 208, 0.18);
   --color-primary-fg:          #ffffff;
-  --color-primary-fg-subtle:   #c084fc;
-  --color-primary-border:      #6d28d9;
-  --color-primary-border-hover: #7c3aed;
+  --color-primary-fg-subtle:   #c0b8fc;
+  --color-primary-border:      #5c4dd0;
+  --color-primary-border-hover: #6e5fe8;
 
   /* ── Color: Destructive ────────────────────────────────────────────────── */
-  --color-destructive-bg:          #e11d48;
-  --color-destructive-bg-hover:    #f43f5e;
-  --color-destructive-bg-active:   #be123c;
-  --color-destructive-bg-subtle:   rgba(244, 63, 94, 0.12);
-  --color-destructive-bg-subtle-hover: rgba(244, 63, 94, 0.18);
+  --color-destructive-bg:          #d31d42;
+  --color-destructive-bg-hover:    #ef3d59;
+  --color-destructive-bg-active:   #ae1238;
+  --color-destructive-bg-subtle:   rgba(211, 29, 66, 0.12);
+  --color-destructive-bg-subtle-hover: rgba(211, 29, 66, 0.18);
   --color-destructive-fg:          #ffffff;
-  --color-destructive-fg-subtle:   #fb7185;
-  --color-destructive-border:      #e11d48;
-  --color-destructive-border-hover: #f43f5e;
+  --color-destructive-fg-subtle:   #f87182;
+  --color-destructive-border:      #d31d42;
+  --color-destructive-border-hover: #ef3d59;
 
   /* ── Color: Status ─────────────────────────────────────────────────────── */
-  --color-success-bg:          #16a34a;
-  --color-success-bg-subtle:   rgba(34, 197, 94, 0.12);
+  --color-success-bg:          #168f42;
+  --color-success-bg-subtle:   rgba(22, 143, 66, 0.12);
   --color-success-fg:          #ffffff;
-  --color-success-fg-subtle:   #4ade80;
-  --color-success-border:      #16a34a;
+  --color-success-fg-subtle:   #4dd47a;
+  --color-success-border:      #168f42;
 
-  --color-warning-bg:          #f77018;
-  --color-warning-bg-subtle:   rgba(247, 112, 24, 0.12);
+  --color-warning-bg:          #d96010;
+  --color-warning-bg-subtle:   rgba(217, 96, 16, 0.12);
   --color-warning-fg:          #000000;
-  --color-warning-fg-subtle:   #f99030;
-  --color-warning-border:      #f77018;
+  --color-warning-fg-subtle:   #ed8420;
+  --color-warning-border:      #d96010;
 
-  --color-info-bg:             #2563eb;
-  --color-info-bg-subtle:      rgba(59, 130, 246, 0.12);
+  --color-info-bg:             #1f52d4;
+  --color-info-bg-subtle:      rgba(31, 82, 212, 0.12);
   --color-info-fg:             #ffffff;
-  --color-info-fg-subtle:      #60a5fa;
-  --color-info-border:         #2563eb;
+  --color-info-fg-subtle:      #5a9ef4;
+  --color-info-border:         #1f52d4;
 
   /* ── Color: Avatar Palette ──────────────────────────────────────────────── */
   /* Five distinct hues for avatar initials — bg is the solid hue, fg is the text on top */
@@ -355,9 +355,9 @@ html {
   --shadow-inset-lg: inset 0px 4px 8px rgba(0, 0, 0, 0.6);
 
   /* Glow */
-  --glow-lilac-sm: 0px 0px 10px rgba(109, 40, 217, 0.45);
-  --glow-lilac-md: 0px 0px 18px rgba(109, 40, 217, 0.5), 0px 0px 5px rgba(109, 40, 217, 0.55);
-  --glow-lilac-lg: 0px 0px 36px rgba(109, 40, 217, 0.55), 0px 0px 10px rgba(109, 40, 217, 0.65);
+  --glow-lilac-sm: 0px 0px 10px rgba(92, 77, 208, 0.45);
+  --glow-lilac-md: 0px 0px 18px rgba(92, 77, 208, 0.5), 0px 0px 5px rgba(92, 77, 208, 0.55);
+  --glow-lilac-lg: 0px 0px 36px rgba(92, 77, 208, 0.55), 0px 0px 10px rgba(92, 77, 208, 0.65);
 
   /* Semantic Shadow Aliases */
   --shadow-surface-raised:   var(--shadow-sm);
