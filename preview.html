@@ -9,18 +9,144 @@
   <style>
 
     /* ── Layout ───────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
     body {
       background: var(--color-bg-canvas);
       min-height: 100vh;
-      padding: var(--space-8) var(--space-6);
+      display: flex;
     }
 
     .page {
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+    }
+
+    /* ── Side Navigation ─────────────────────────────────────────────────── */
+    .side-nav {
+      position: sticky;
+      top: 0;
+      width: 248px;
+      min-width: 248px;
+      height: 100vh;
+      background: var(--color-bg-base);
+      border-right: 1px solid var(--color-border-subtle);
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-6) 0;
+      overflow-y: auto;
+      z-index: var(--z-sticky);
+    }
+
+    .side-nav-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: 0 var(--space-5) var(--space-5);
+      border-bottom: 1px solid var(--color-border-subtle);
+      margin-bottom: var(--space-3);
+    }
+
+    .side-nav-header-title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2-5);
+    }
+
+    .side-nav-header h1 {
+      font-size: var(--text-lg);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text-primary);
+      margin: 0;
+      line-height: var(--leading-tight);
+    }
+
+    .side-nav-header p {
+      font-size: var(--text-xs);
+      color: var(--color-text-tertiary);
+      margin: 0;
+      line-height: var(--leading-normal);
+    }
+
+    .side-nav-group-label {
+      font-family: var(--font-mono);
+      font-size: var(--mono-caption-xs-size);
+      font-weight: var(--mono-overline-md-weight);
+      letter-spacing: var(--mono-overline-md-tracking);
+      text-transform: uppercase;
+      color: var(--color-text-disabled);
+      padding: var(--space-4) var(--space-5) var(--space-1-5);
+    }
+
+    .side-nav-items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-0-5);
+      padding: 0 var(--space-2-5);
+    }
+
+    .side-nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2-5);
+      padding: var(--space-2) var(--space-2-5);
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      line-height: var(--leading-none);
+      color: var(--color-text-tertiary);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: color var(--duration-fast) var(--ease-default),
+                  background var(--duration-fast) var(--ease-default);
+      width: 100%;
+      text-align: left;
+    }
+
+    .side-nav-item:hover {
+      color: var(--color-text-secondary);
+      background: var(--color-bg-elevated);
+    }
+
+    .side-nav-item.active {
+      color: var(--color-primary-fg-subtle);
+      background: var(--color-primary-bg-subtle);
+    }
+
+    .side-nav-item-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: 0.6;
+      transition: opacity var(--duration-fast) var(--ease-default);
+    }
+
+    .side-nav-item:hover .side-nav-item-icon,
+    .side-nav-item.active .side-nav-item-icon {
+      opacity: 1;
+    }
+
+    .side-nav-item-label {
+      flex: 1;
+    }
+
+
+    /* ── Main Content Area ────────────────────────────────────────────────── */
+    .page-content {
+      flex: 1;
+      min-width: 0;
       max-width: 1100px;
       margin: 0 auto;
+      padding: var(--space-8) var(--space-8);
       display: flex;
       flex-direction: column;
       gap: var(--space-16);
+      overflow-y: auto;
     }
 
     /* ── Section Chrome ───────────────────────────────────────────────────── */
@@ -67,46 +193,7 @@
     .grid-auto { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 
     /* ── Page Header ──────────────────────────────────────────────────────── */
-    .page-header {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-      padding-bottom: var(--space-8);
-      border-bottom: 1px solid var(--color-border-subtle);
-    }
-
-    .page-header-eyebrow {
-      font-family:    var(--font-mono);
-      font-size:      var(--mono-overline-md-size);
-      font-weight:    var(--mono-overline-md-weight);
-      line-height:    var(--mono-overline-md-leading);
-      letter-spacing: var(--mono-overline-md-tracking);
-      text-transform: uppercase;
-      color: var(--color-primary-fg-subtle);
-    }
-
-    .page-header h1 {
-      font-size: var(--text-4xl);
-      font-weight: var(--weight-bold);
-      letter-spacing: var(--tracking-tighter);
-      color: var(--color-text-primary);
-      margin: 0;
-      line-height: var(--leading-tight);
-    }
-
-    .page-header p {
-      font-size: var(--text-base);
-      color: var(--color-text-secondary);
-      margin: 0;
-      max-width: 520px;
-      line-height: var(--leading-relaxed);
-    }
-
-    .page-header-title-row {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
+    /* page-header kept for potential reuse but no longer in main layout */
 
     /* ── Token Label ──────────────────────────────────────────────────────── */
     .token-label {
@@ -347,8 +434,9 @@
     }
 
     .radius-box {
-      width: 176px;
-      height: 176px;
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 176px;
       background: var(--color-primary-bg-subtle);
       border: 1.5px solid var(--color-primary-border);
     }
@@ -1393,77 +1481,6 @@
     .select-wrap svg, .dropdown-wrap svg { max-width: 16px; max-height: 16px; }
 
     /* ── Tab Navigation ──────────────────────────────────────────────────── */
-    .tab-nav {
-      position: sticky;
-      top: 0;
-      z-index: var(--z-sticky);
-      background: var(--color-bg-canvas);
-      border-bottom: 1px solid var(--color-border-subtle);
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      /* Bleed to negate body horizontal padding so it spans full width */
-      margin-left:  calc(-1 * var(--space-6));
-      margin-right: calc(-1 * var(--space-6));
-      padding-left:  var(--space-6);
-      padding-right: var(--space-6);
-    }
-
-    .tab-btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-1-5);
-      padding: var(--space-3) var(--space-3);
-      font-family: var(--font-sans);
-      font-size: var(--text-md);
-      font-weight: var(--weight-medium);
-      line-height: var(--leading-none);
-      color: var(--color-text-tertiary);
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      cursor: pointer;
-      transition: color var(--duration-fast) var(--ease-default),
-                  border-color var(--duration-fast) var(--ease-default);
-      white-space: nowrap;
-      margin-bottom: -1px; /* overlap nav border-bottom so active indicator sits flush */
-    }
-
-    .tab-btn:hover { color: var(--color-text-secondary); }
-
-    .tab-btn.active {
-      color: var(--color-text-primary);
-      border-bottom-color: var(--color-primary-bg);
-    }
-
-    .tab-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 18px;
-      height: 18px;
-      padding: 0 var(--space-1-5);
-      border-radius: var(--radius-full);
-      border: 1px solid var(--color-border-subtle);
-      background: var(--color-bg-elevated);
-      font-family: var(--font-mono);
-      font-size: var(--mono-caption-xs-size);
-      font-weight: var(--mono-label-xs-weight);
-      color: var(--color-text-disabled);
-      line-height: 0;
-      letter-spacing: 0;
-      transition: background var(--duration-fast) var(--ease-default),
-                  border-color var(--duration-fast) var(--ease-default),
-                  color var(--duration-fast) var(--ease-default);
-    }
-
-    .tab-btn.active .tab-badge {
-      background: var(--color-primary-bg-subtle);
-      border-color: var(--color-primary-border);
-      color: var(--color-primary-fg-subtle);
-    }
-
     /* Tab panels — sections default to hidden; JS adds .tab-active */
     .section[data-tab]             { display: none; }
     .section[data-tab].tab-active  { display: flex; }
@@ -1608,48 +1625,69 @@
 
 <div class="page">
 
-  <!-- ── Page Header ──────────────────────────────────────────────────────── -->
-  <header class="page-header">
-    <div class="page-header-title-row">
-      <h1>Vesper</h1>
-      <span class="badge badge-md badge-primary"><span class="badge-dot"></span>Dark Mode · v1.0</span>
+  <!-- ── Side Navigation ──────────────────────────────────────────────────── -->
+  <aside class="side-nav" role="navigation" aria-label="Design system sections">
+    <div class="side-nav-header">
+      <div class="side-nav-header-title">
+        <h1>Vesper</h1>
+        <span class="badge badge-primary"><span class="badge-dot"></span>v1.0</span>
+      </div>
+      <p>Dark-native design system</p>
     </div>
-    <p style="white-space:nowrap;">A dark-native design system. Every visual decision traced to a semantic token.</p>
-  </header>
 
-  <!-- ── Tab Navigation ─────────────────────────────────────────────────── -->
-  <nav class="tab-nav" role="tablist" aria-label="Design system sections">
-    <button class="tab-btn" data-tab="foundations" role="tab" aria-selected="false">
-      Foundations
-      <span class="tab-badge">5</span>
-    </button>
-    <button class="tab-btn" data-tab="elevation" role="tab" aria-selected="false">
-      Elevation
-      <span class="tab-badge">1</span>
-    </button>
-    <button class="tab-btn" data-tab="motion" role="tab" aria-selected="false">
-      Motion
-      <span class="tab-badge">1</span>
-    </button>
-    <button class="tab-btn" data-tab="components" role="tab" aria-selected="false">
-      Components
-      <span class="tab-badge">19</span>
-    </button>
-    <button class="tab-btn" data-tab="dataviz" role="tab" aria-selected="false">
-      Data Viz
-      <span class="tab-badge">5</span>
-    </button>
-    <button class="tab-btn" data-tab="icons" role="tab" aria-selected="false">
-      Icons
-      <span class="tab-badge" id="icon-tab-count">—</span>
-    </button>
-  </nav>
+    <div class="side-nav-group-label">Foundations</div>
+    <div class="side-nav-items">
+      <button class="side-nav-item" data-tab="color">
+        <i data-lucide="palette" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Color</span>
+      </button>
+      <button class="side-nav-item" data-tab="typography">
+        <i data-lucide="type" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Typography</span>
+      </button>
+      <button class="side-nav-item" data-tab="spacing">
+        <i data-lucide="ruler" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Spacing</span>
+      </button>
+      <button class="side-nav-item" data-tab="radius">
+        <i data-lucide="square" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Border Radius</span>
+      </button>
+      <button class="side-nav-item" data-tab="elevation">
+        <i data-lucide="layers" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Elevation</span>
+      </button>
+      <button class="side-nav-item" data-tab="motion">
+        <i data-lucide="zap" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Motion</span>
+      </button>
+      <button class="side-nav-item" data-tab="icons">
+        <i data-lucide="grid-3x3" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Icons</span>
+      </button>
+    </div>
+
+    <div class="side-nav-group-label">Library</div>
+    <div class="side-nav-items">
+      <button class="side-nav-item" data-tab="components">
+        <i data-lucide="box" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Components</span>
+      </button>
+      <button class="side-nav-item" data-tab="dataviz">
+        <i data-lucide="bar-chart-3" class="side-nav-item-icon"></i>
+        <span class="side-nav-item-label">Data Viz</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ────────────────────────────────────────────────────── -->
+  <main class="page-content">
 
 
   <!-- ════════════════════════════════════════════════════════════════════════
        1. COLOR RAMPS (Primitive)
   ═════════════════════════════════════════════════════════════════════════ -->
-  <section class="section" data-tab="foundations">
+  <section class="section" data-tab="color">
     <div class="section-header">
       <h2 class="section-title">Color Ramps</h2>
       <span class="section-meta">Primitive</span>
@@ -1761,7 +1799,7 @@
   <!-- ════════════════════════════════════════════════════════════════════════
        2. SEMANTIC COLORS
   ═════════════════════════════════════════════════════════════════════════ -->
-  <section class="section" data-tab="foundations">
+  <section class="section" data-tab="color">
     <div class="section-header">
       <h2 class="section-title">Semantic Colors</h2>
       <span class="section-meta">Semantic</span>
@@ -1947,7 +1985,7 @@
   <!-- ════════════════════════════════════════════════════════════════════════
        3. TYPOGRAPHY
   ═════════════════════════════════════════════════════════════════════════ -->
-  <section class="section" data-tab="foundations">
+  <section class="section" data-tab="typography">
     <div class="section-header">
       <h2 class="section-title">Typography Scale</h2>
       <span class="section-meta">Inter · Semantic</span>
@@ -2109,7 +2147,7 @@
   <!-- ════════════════════════════════════════════════════════════════════════
        4. SPACING
   ═════════════════════════════════════════════════════════════════════════ -->
-  <section class="section" data-tab="foundations">
+  <section class="section" data-tab="spacing">
     <div class="section-header">
       <h2 class="section-title">Spacing Scale</h2>
       <span class="section-meta">4px Base · Primitive</span>
@@ -2138,76 +2176,48 @@
   <!-- ════════════════════════════════════════════════════════════════════════
        5. BORDER RADIUS
   ═════════════════════════════════════════════════════════════════════════ -->
-  <section class="section" data-tab="foundations">
+  <section class="section" data-tab="radius">
     <div class="section-header">
       <h2 class="section-title">Border Radius</h2>
       <span class="section-meta">Primitive</span>
     </div>
 
-    <div class="carousel-outer" id="carousel-radius">
-      <div class="carousel-track" id="carousel-track-radius" style="gap:var(--space-4);">
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-none);"></div>
-            <div class="radius-label"><div class="token-label">none</div><div class="token-value">0px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-xs);"></div>
-            <div class="radius-label"><div class="token-label">xs</div><div class="token-value">2px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-sm);"></div>
-            <div class="radius-label"><div class="token-label">sm</div><div class="token-value">4px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-md);"></div>
-            <div class="radius-label"><div class="token-label">md</div><div class="token-value">6px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-lg);"></div>
-            <div class="radius-label"><div class="token-label">lg</div><div class="token-value">8px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-xl);"></div>
-            <div class="radius-label"><div class="token-label">xl</div><div class="token-value">12px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-2xl);"></div>
-            <div class="radius-label"><div class="token-label">2xl</div><div class="token-value">16px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-3xl);"></div>
-            <div class="radius-label"><div class="token-label">3xl</div><div class="token-value">24px</div></div>
-          </div>
-        </div>
-        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
-          <div class="radius-card">
-            <div class="radius-box" style="border-radius:var(--radius-full);"></div>
-            <div class="radius-label"><div class="token-label">full</div><div class="token-value">9999px</div></div>
-          </div>
-        </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);">
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-none);"></div>
+        <div class="radius-label"><div class="token-label">none</div><div class="token-value">0px</div></div>
       </div>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="carousel-radius-prev" aria-label="Previous slide">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m10 4-4 4 4 4"/></svg>
-        </button>
-        <button class="carousel-btn" id="carousel-radius-next" aria-label="Next slide">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 4 4 4-4 4"/></svg>
-        </button>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-xs);"></div>
+        <div class="radius-label"><div class="token-label">xs</div><div class="token-value">2px</div></div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-sm);"></div>
+        <div class="radius-label"><div class="token-label">sm</div><div class="token-value">4px</div></div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-md);"></div>
+        <div class="radius-label"><div class="token-label">md</div><div class="token-value">6px</div></div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-lg);"></div>
+        <div class="radius-label"><div class="token-label">lg</div><div class="token-value">8px</div></div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-xl);"></div>
+        <div class="radius-label"><div class="token-label">xl</div><div class="token-value">12px</div></div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-2xl);"></div>
+        <div class="radius-label"><div class="token-label">2xl</div><div class="token-value">16px</div></div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-3xl);"></div>
+        <div class="radius-label"><div class="token-label">3xl</div><div class="token-value">24px</div></div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:var(--radius-full);"></div>
+        <div class="radius-label"><div class="token-label">full</div><div class="token-value">9999px</div></div>
       </div>
     </div>
   </section>
@@ -3589,25 +3599,23 @@
   <!-- Copy feedback toast -->
   <div class="icon-copy-toast" id="icon-copy-toast">Copied!</div>
 
-  <!-- Footer -->
-  <footer style="padding:var(--space-8) 0;border-top:1px solid var(--color-border-subtle);display:flex;align-items:center;justify-content:space-between;">
-    <div class="mono-caption-sm" style="color:var(--color-text-disabled);">vesper · v1.0</div>
-    <div style="font-size:var(--text-xs);color:var(--color-text-disabled);">Primitive → Semantic → Component</div>
-  </footer>
 
+  </main><!-- .page-content -->
 </div>
 
 <script>
-  // ── Tab switching ──────────────────────────────────────────────────────────
-  const TAB_BTNS     = document.querySelectorAll('.tab-btn');
+  // ── Render Lucide icons in side-nav ─────────────────────────────────────────
+  try { lucide.createIcons(); } catch(e) { console.warn('lucide.createIcons:', e); }
+
+  // ── Side-nav switching ─────────────────────────────────────────────────────
+  const NAV_ITEMS    = document.querySelectorAll('.side-nav-item');
   const TAB_SECTIONS = document.querySelectorAll('.section[data-tab]');
+  const PAGE_CONTENT = document.querySelector('.page-content');
 
   function switchTab(name) {
-    // Buttons
-    TAB_BTNS.forEach(btn => {
-      const isActive = btn.dataset.tab === name;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', isActive);
+    // Nav items
+    NAV_ITEMS.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === name);
     });
 
     // Sections — restore display:flex for active panel
@@ -3619,30 +3627,32 @@
     history.replaceState(null, '', '#' + name);
 
     // Scroll content area back to top on tab switch
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (PAGE_CONTENT) PAGE_CONTENT.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  // Wire up buttons
-  TAB_BTNS.forEach(btn => {
+  // Wire up nav items
+  NAV_ITEMS.forEach(btn => {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
 
-  // Keyboard navigation (←/→ arrows between tabs)
-  document.querySelector('.tab-nav').addEventListener('keydown', e => {
-    const tabs   = [...TAB_BTNS];
-    const active = tabs.findIndex(b => b.classList.contains('active'));
-    if (e.key === 'ArrowRight' && active < tabs.length - 1) {
-      tabs[active + 1].focus();
-      switchTab(tabs[active + 1].dataset.tab);
-    } else if (e.key === 'ArrowLeft' && active > 0) {
-      tabs[active - 1].focus();
-      switchTab(tabs[active - 1].dataset.tab);
+  // Keyboard navigation (↑/↓ arrows between nav items)
+  document.querySelector('.side-nav').addEventListener('keydown', e => {
+    const items  = [...NAV_ITEMS];
+    const active = items.findIndex(b => b.classList.contains('active'));
+    if (e.key === 'ArrowDown' && active < items.length - 1) {
+      e.preventDefault();
+      items[active + 1].focus();
+      switchTab(items[active + 1].dataset.tab);
+    } else if (e.key === 'ArrowUp' && active > 0) {
+      e.preventDefault();
+      items[active - 1].focus();
+      switchTab(items[active - 1].dataset.tab);
     }
   });
 
-  // Init — restore from URL hash or default to foundations
-  const initial = ['foundations','elevation','motion','components']
-    .find(t => t === window.location.hash.slice(1)) || 'foundations';
+  // Init — restore from URL hash or default to color
+  const initial = ['color','typography','spacing','radius','elevation','motion','components','dataviz','icons']
+    .find(t => t === window.location.hash.slice(1)) || 'color';
   switchTab(initial);
 
   // ── Dropdown menus ──────────────────────────────────────────────────────────
@@ -4742,12 +4752,7 @@
     const catGroup   = document.getElementById('icon-categories');
     const searchInput= document.getElementById('icon-search');
     const copyToast  = document.getElementById('icon-copy-toast');
-    const tabCount   = document.getElementById('icon-tab-count');
-
     if (!grid || !catGroup) return;
-
-    // Update tab badge
-    tabCount.textContent = ICON_CATALOGUE.length;
 
     // Build category pills
     categories.forEach(cat => {
