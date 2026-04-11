@@ -26,96 +26,139 @@ html {
 :root,
 [data-theme="dark"] {
 
+  /* ── Primitive Color Properties ────────────────────────────────────────── */
+  /* Raw ramp values — semantic tokens reference these via var().            */
+  --primitive-neutral-0:       #000000;
+  --primitive-neutral-50:      #080808;
+  --primitive-neutral-100:     #0f0f0f;
+  --primitive-neutral-150:     #141414;
+  --primitive-neutral-200:     #1a1a1a;
+  --primitive-neutral-250:     #222222;
+  --primitive-neutral-300:     #2a2a2a;
+  --primitive-neutral-350:     #333333;
+  --primitive-neutral-400:     #3d3d3d;
+  --primitive-neutral-450:     #4a4a4a;
+  --primitive-neutral-500:     #575757;
+  --primitive-neutral-550:     #666666;
+  --primitive-neutral-600:     #777777;
+  --primitive-neutral-650:     #8c8c8c;
+  --primitive-neutral-700:     #a0a0a0;
+  --primitive-neutral-800:     #c4c4c4;
+  --primitive-neutral-900:     #e3e3e3;
+  --primitive-neutral-950:     #f0f0f0;
+  --primitive-neutral-1000:    #ffffff;
+
+  --primitive-iris-200:        #dbd6fd;
+  --primitive-iris-300:        #c0b8fc;
+  --primitive-iris-600:        #6e5fe8;
+  --primitive-iris-700:        #5c4dd0;
+  --primitive-iris-800:        #4b3faf;
+
+  --primitive-red-400:         #f87182;
+  --primitive-red-500:         #ef3d59;
+  --primitive-red-600:         #d31d42;
+  --primitive-red-700:         #ae1238;
+
+  --primitive-green-400:       #4dd47a;
+  --primitive-green-500:       #22b255;
+  --primitive-green-600:       #168f42;
+
+  --primitive-amber-400:       #ed8420;
+  --primitive-amber-500:       #d96010;
+
+  --primitive-blue-400:        #5a9ef4;
+  --primitive-blue-600:        #1f52d4;
+
   /* ── Color: Backgrounds ────────────────────────────────────────────────── */
-  --color-bg-canvas:           #080808;
-  --color-bg-base:             #0f0f0f;
-  --color-bg-surface:          #141414;
-  --color-bg-elevated:         #1a1a1a;
-  --color-bg-overlay:          #222222;
-  --color-bg-inverse:          #f0f0f0;
+  --color-bg-canvas:           var(--primitive-neutral-50);
+  --color-bg-base:             var(--primitive-neutral-100);
+  --color-bg-surface:          var(--primitive-neutral-150);
+  --color-bg-elevated:         var(--primitive-neutral-200);
+  --color-bg-overlay:          var(--primitive-neutral-250);
+  --color-bg-inverse:          var(--primitive-neutral-950);
   --color-bg-hover:            rgba(255, 255, 255, 0.04);
   --color-bg-active:           rgba(255, 255, 255, 0.08);
   --color-bg-selected:         rgba(92, 77, 208, 0.12);
   --color-bg-selection:        rgba(92, 77, 208, 0.30); /* text highlight selection */
 
   /* ── Color: Borders ────────────────────────────────────────────────────── */
-  --color-border-subtlest:     #1a1a1a;
-  --color-border-subtle:       #2a2a2a;
-  --color-border-default:      #333333;
-  --color-border-strong:       #4a4a4a;
-  --color-border-inverse:      #c4c4c4;
-  --color-border-focus:        #c0b8fc;
-  --color-border-error:        #ef3d59;
-  --color-border-success:      #22b255;
+  --color-border-subtlest:     var(--primitive-neutral-200);
+  --color-border-subtle:       var(--primitive-neutral-300);
+  --color-border-default:      var(--primitive-neutral-350);
+  --color-border-strong:       var(--primitive-neutral-450);
+  --color-border-inverse:      var(--primitive-neutral-800);
+  --color-border-focus:        var(--primitive-iris-300);
+  --color-border-error:        var(--primitive-red-500);
+  --color-border-success:      var(--primitive-green-500);
   --color-border-warning:      #e07c00;
   --color-border-swatch:       rgba(255,255,255,0.06); /* faint white edge for colour chips on any surface */
 
   /* ── Color: Text ───────────────────────────────────────────────────────── */
-  --color-text-primary:        #f0f0f0;
-  --color-text-secondary:      #a0a0a0;
-  --color-text-tertiary:       #777777;
-  --color-text-disabled:       #4a4a4a;
-  --color-text-inverse:        #0f0f0f;
-  --color-text-link:           #c0b8fc;
-  --color-text-link-hover:     #dbd6fd;
-  --color-text-error:          #f87182;
-  --color-text-success:        #4dd47a;
-  --color-text-warning:        #ed8420;
-  --color-text-info:           #5a9ef4;
+  --color-text-primary:        var(--primitive-neutral-950);
+  --color-text-secondary:      var(--primitive-neutral-700);
+  --color-text-tertiary:       var(--primitive-neutral-600);
+  --color-text-disabled:       var(--primitive-neutral-450);
+  --color-text-inverse:        var(--primitive-neutral-100);
+  --color-text-link:           var(--primitive-iris-300);
+  --color-text-link-hover:     var(--primitive-iris-200);
+  --color-text-error:          var(--primitive-red-400);
+  --color-text-success:        var(--primitive-green-400);
+  --color-text-warning:        var(--primitive-amber-400);
+  --color-text-info:           var(--primitive-blue-400);
 
   /* ── Color: Icon ───────────────────────────────────────────────────────── */
-  --color-icon-primary:        #e3e3e3;
-  --color-icon-secondary:      #8c8c8c;
-  --color-icon-tertiary:       #575757;
-  --color-icon-disabled:       #3d3d3d;
-  --color-icon-inverse:        #141414;
-  --color-icon-error:          #f87182;
-  --color-icon-success:        #4dd47a;
-  --color-icon-warning:        #ed8420;
-  --color-icon-info:           #5a9ef4;
-  --color-icon-brand:          #c0b8fc;
+  --color-icon-primary:        var(--primitive-neutral-900);
+  --color-icon-secondary:      var(--primitive-neutral-650);
+  --color-icon-tertiary:       var(--primitive-neutral-500);
+  --color-icon-disabled:       var(--primitive-neutral-400);
+  --color-icon-inverse:        var(--primitive-neutral-150);
+  --color-icon-error:          var(--primitive-red-400);
+  --color-icon-success:        var(--primitive-green-400);
+  --color-icon-warning:        var(--primitive-amber-400);
+  --color-icon-info:           var(--primitive-blue-400);
+  --color-icon-brand:          var(--primitive-iris-300);
 
   /* ── Color: Primary CTA (Iris) ─────────────────────────────────────────── */
   /* Contrast vs #ffffff — bg: 5.81:1 AA · hover: 4.52:1 AA · active: 7.10:1 AAA */
-  --color-primary-bg:          #5c4dd0;
-  --color-primary-bg-hover:    #6e5fe8;
-  --color-primary-bg-active:   #4b3faf;
+  --color-primary-bg:          var(--primitive-iris-700);
+  --color-primary-bg-hover:    var(--primitive-iris-600);
+  --color-primary-bg-active:   var(--primitive-iris-800);
   --color-primary-bg-subtle:   rgba(92, 77, 208, 0.12);
   --color-primary-bg-subtle-hover: rgba(92, 77, 208, 0.18);
-  --color-primary-fg:          #ffffff;
-  --color-primary-fg-subtle:   #c0b8fc;
-  --color-primary-border:      #5c4dd0;
-  --color-primary-border-hover: #6e5fe8;
+  --color-primary-fg:          var(--primitive-neutral-1000);
+  --color-primary-fg-subtle:   var(--primitive-iris-300);
+  --color-primary-border:      var(--primitive-iris-700);
+  --color-primary-border-hover: var(--primitive-iris-600);
 
   /* ── Color: Destructive ────────────────────────────────────────────────── */
-  --color-destructive-bg:          #d31d42;
-  --color-destructive-bg-hover:    #ef3d59;
-  --color-destructive-bg-active:   #ae1238;
+  --color-destructive-bg:          var(--primitive-red-600);
+  --color-destructive-bg-hover:    var(--primitive-red-500);
+  --color-destructive-bg-active:   var(--primitive-red-700);
   --color-destructive-bg-subtle:   rgba(211, 29, 66, 0.12);
   --color-destructive-bg-subtle-hover: rgba(211, 29, 66, 0.18);
-  --color-destructive-fg:          #ffffff;
-  --color-destructive-fg-subtle:   #f87182;
-  --color-destructive-border:      #d31d42;
-  --color-destructive-border-hover: #ef3d59;
+  --color-destructive-fg:          var(--primitive-neutral-1000);
+  --color-destructive-fg-subtle:   var(--primitive-red-400);
+  --color-destructive-border:      var(--primitive-red-600);
+  --color-destructive-border-hover: var(--primitive-red-500);
 
   /* ── Color: Status ─────────────────────────────────────────────────────── */
-  --color-success-bg:          #168f42;
+  --color-success-bg:          var(--primitive-green-600);
   --color-success-bg-subtle:   rgba(22, 143, 66, 0.12);
-  --color-success-fg:          #ffffff;
-  --color-success-fg-subtle:   #4dd47a;
-  --color-success-border:      #168f42;
+  --color-success-fg:          var(--primitive-neutral-1000);
+  --color-success-fg-subtle:   var(--primitive-green-400);
+  --color-success-border:      var(--primitive-green-600);
 
-  --color-warning-bg:          #d96010;
+  --color-warning-bg:          var(--primitive-amber-500);
   --color-warning-bg-subtle:   rgba(217, 96, 16, 0.12);
-  --color-warning-fg:          #000000;
-  --color-warning-fg-subtle:   #ed8420;
-  --color-warning-border:      #d96010;
+  --color-warning-fg:          var(--primitive-neutral-0);
+  --color-warning-fg-subtle:   var(--primitive-amber-400);
+  --color-warning-border:      var(--primitive-amber-500);
 
-  --color-info-bg:             #1f52d4;
+  --color-info-bg:             var(--primitive-blue-600);
   --color-info-bg-subtle:      rgba(31, 82, 212, 0.12);
-  --color-info-fg:             #ffffff;
-  --color-info-fg-subtle:      #5a9ef4;
-  --color-info-border:         #1f52d4;
+  --color-info-fg:             var(--primitive-neutral-1000);
+  --color-info-fg-subtle:      var(--primitive-blue-400);
+  --color-info-border:         var(--primitive-blue-600);
 
   /* ── Color: Avatar Palette ──────────────────────────────────────────────── */
   /* Five distinct hues for avatar initials — bg is the solid hue, fg is the text on top */
@@ -131,26 +174,26 @@ html {
   --color-avatar-e-fg: var(--color-destructive-fg);
 
   /* ── Color: Neutral Interactive ────────────────────────────────────────── */
-  --color-neutral-bg:              #1a1a1a;
-  --color-neutral-bg-hover:        #2a2a2a;
-  --color-neutral-bg-active:       #333333;
+  --color-neutral-bg:              var(--primitive-neutral-200);
+  --color-neutral-bg-hover:        var(--primitive-neutral-300);
+  --color-neutral-bg-active:       var(--primitive-neutral-350);
   --color-neutral-bg-subtle:       rgba(255, 255, 255, 0.04);
   --color-neutral-bg-subtle-hover: rgba(255, 255, 255, 0.08);
-  --color-neutral-fg:              #f0f0f0;
-  --color-neutral-fg-subtle:       #a0a0a0;
-  --color-neutral-border:          #333333;
-  --color-neutral-border-hover:    #575757;
+  --color-neutral-fg:              var(--primitive-neutral-950);
+  --color-neutral-fg-subtle:       var(--primitive-neutral-700);
+  --color-neutral-border:          var(--primitive-neutral-350);
+  --color-neutral-border-hover:    var(--primitive-neutral-500);
 
   /* ── Color: Code ───────────────────────────────────────────────────────── */
-  --color-code-bg:             #141414;
-  --color-code-bg-block:       #0f0f0f;
-  --color-code-border:         #222222;
+  --color-code-bg:             var(--primitive-neutral-150);
+  --color-code-bg-block:       var(--primitive-neutral-100);
+  --color-code-border:         var(--primitive-neutral-250);
   --color-code-fg:             #d8b4fe;
-  --color-code-fg-punctuation: #777777;
+  --color-code-fg-punctuation: var(--primitive-neutral-600);
   --color-code-fg-keyword:     #c084fc;
   --color-code-fg-string:      #86efac;
   --color-code-fg-number:      #fcd34d;
-  --color-code-fg-comment:     #666666;
+  --color-code-fg-comment:     var(--primitive-neutral-550);
 
   /* ── Typography ────────────────────────────────────────────────────────── */
   /* Primitive font stacks */

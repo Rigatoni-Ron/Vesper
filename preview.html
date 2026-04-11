@@ -102,19 +102,10 @@
       line-height: var(--leading-relaxed);
     }
 
-    .page-header-badge {
-      display: inline-flex;
+    .page-header-title-row {
+      display: flex;
       align-items: center;
-      gap: var(--space-1-5);
-      background: var(--color-primary-bg-subtle);
-      border: 1px solid var(--color-primary-border);
-      color: var(--color-primary-fg-subtle);
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
-      padding: var(--space-1) var(--space-2);
-      border-radius: var(--radius-full);
-      width: fit-content;
-      margin-bottom: var(--space-1);
+      gap: var(--space-3);
     }
 
     /* ── Token Label ──────────────────────────────────────────────────────── */
@@ -346,18 +337,18 @@
     ════════════════════════════════════════════════════════════════════════ */
 
     .radius-card {
-      background: var(--color-bg-surface);
-      border: 1px solid var(--color-border-subtle);
-      padding: var(--space-4);
+      background: transparent;
+      border: none;
+      padding: var(--space-3) var(--space-2);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-3);
+      gap: var(--space-2);
     }
 
     .radius-box {
-      width: 56px;
-      height: 56px;
+      width: 176px;
+      height: 176px;
       background: var(--color-primary-bg-subtle);
       border: 1.5px solid var(--color-primary-border);
     }
@@ -480,6 +471,7 @@
     }
 
     /* ── Badges ───────────────────────────────────────────────────────────── */
+    /* Base — always pill. Two sizes: .badge (sm) and .badge-md             */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -488,12 +480,18 @@
       font-weight: var(--weight-medium);
       line-height: var(--leading-none);
       padding: var(--space-0-75) var(--space-2);
-      border-radius: var(--radius-badge);
+      border-radius: var(--radius-full);
       border: 1px solid transparent;
+      white-space: nowrap;
     }
 
-    .badge-pill { border-radius: var(--radius-badge-pill); }
+    .badge-md {
+      font-size: var(--text-sm);
+      padding: var(--space-1) var(--space-2-5);
+      gap: var(--space-1-5);
+    }
 
+    /* Colour variants — semantic tokens only */
     .badge-neutral  { background: var(--color-neutral-bg); color: var(--color-neutral-fg-subtle); border-color: var(--color-neutral-border); }
     .badge-primary  { background: var(--color-primary-bg-subtle); color: var(--color-primary-fg-subtle); border-color: var(--color-primary-border); }
     .badge-success  { background: var(--color-success-bg-subtle); color: var(--color-success-fg-subtle); border-color: var(--color-success-border); }
@@ -506,7 +504,9 @@
       height: 5px;
       border-radius: var(--radius-full);
       background: currentColor;
+      flex-shrink: 0;
     }
+    .badge-md .badge-dot { width: 6px; height: 6px; }
 
     /* ── Inputs ───────────────────────────────────────────────────────────── */
     .input-wrap { display: flex; flex-direction: column; gap: var(--space-1-5); }
@@ -1114,19 +1114,20 @@
     .alert-success { background: var(--color-success-bg-subtle); border-color: var(--color-success-border); }
     .alert-success .alert-title { color: var(--color-success-fg-subtle); }
     .alert-success .alert-icon  { color: var(--color-success-fg-subtle); }
-    .alert-success code { background: var(--color-success-bg-subtle); color: var(--color-success-fg-subtle); border-color: var(--color-success-border); }
+    .alert-success { background: var(--color-success-bg-subtle); border-color: var(--color-success-border); }
+    .alert-success .alert-title { color: var(--color-success-fg-subtle); }
+    .alert-success .alert-icon  { color: var(--color-success-fg-subtle); }
     .alert-warning { background: var(--color-warning-bg-subtle); border-color: var(--color-warning-border); }
     .alert-warning .alert-title { color: var(--color-warning-fg-subtle); }
     .alert-warning .alert-icon  { color: var(--color-warning-fg-subtle); }
-    .alert-warning code { background: var(--color-warning-bg-subtle); color: var(--color-warning-fg-subtle); border-color: var(--color-warning-border); }
     .alert-error   { background: var(--color-destructive-bg-subtle); border-color: var(--color-destructive-border); }
     .alert-error .alert-title   { color: var(--color-destructive-fg-subtle); }
     .alert-error .alert-icon    { color: var(--color-destructive-fg-subtle); }
-    .alert-error code { background: var(--color-destructive-bg-subtle); color: var(--color-destructive-fg-subtle); border-color: var(--color-destructive-border); }
     .alert-info    { background: var(--color-info-bg-subtle); border-color: var(--color-info-border); }
     .alert-info .alert-title    { color: var(--color-info-fg-subtle); }
     .alert-info .alert-icon     { color: var(--color-info-fg-subtle); }
-    .alert-info code { background: var(--color-info-bg-subtle); color: var(--color-info-fg-subtle); border-color: var(--color-info-border); }
+    /* Inline code inside alerts: strip the bordered badge look */
+    .alert code { background: transparent; border: none; padding: 0; border-radius: 0; font-weight: var(--weight-medium); }
 
     /* ── Content Tabs ────────────────────────────────────────────────────── */
     .ctabs { display: flex; border-bottom: 1px solid var(--color-border-subtle); }
@@ -1609,11 +1610,10 @@
 
   <!-- ── Page Header ──────────────────────────────────────────────────────── -->
   <header class="page-header">
-    <div class="page-header-badge">
-      <span style="width:6px;height:6px;border-radius:50%;background:var(--color-primary-bg);display:inline-block;"></span>
-      Dark Mode · v1.0
+    <div class="page-header-title-row">
+      <h1>Vesper</h1>
+      <span class="badge badge-md badge-primary"><span class="badge-dot"></span>Dark Mode · v1.0</span>
     </div>
-    <h1>Vesper</h1>
     <p style="white-space:nowrap;">A dark-native design system. Every visual decision traced to a semantic token.</p>
   </header>
 
@@ -1767,69 +1767,180 @@
       <span class="section-meta">Semantic</span>
     </div>
 
-    <div class="grid grid-3" style="gap:var(--space-6);">
+    <div>
+      <div class="ctabs">
+        <button class="ctab active" data-ctab="sc-surface" role="tab" aria-selected="true">Surface</button>
+        <button class="ctab" data-ctab="sc-type" role="tab" aria-selected="false">Text + Icon</button>
+        <button class="ctab" data-ctab="sc-primary" role="tab" aria-selected="false">Primary</button>
+        <button class="ctab" data-ctab="sc-status" role="tab" aria-selected="false">Status</button>
+        <button class="ctab" data-ctab="sc-neutral" role="tab" aria-selected="false">Neutral + Code</button>
+      </div>
 
-      <!-- Backgrounds -->
+    <!-- Surface: bg + border -->
+    <div class="ctab-panel active" data-ctab-panel="sc-surface">
+    <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:var(--space-6);padding-top:var(--space-4);">
+
       <div class="semantic-color-group">
         <div class="semantic-color-group-title">Background</div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-canvas)"></div><span class="semantic-color-name">bg-canvas</span><span class="semantic-color-hex">#080808</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-base)"></div><span class="semantic-color-name">bg-base</span><span class="semantic-color-hex">#0f0f0f</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-surface)"></div><span class="semantic-color-name">bg-surface</span><span class="semantic-color-hex">#141414</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-elevated)"></div><span class="semantic-color-name">bg-elevated</span><span class="semantic-color-hex">#1a1a1a</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-overlay)"></div><span class="semantic-color-name">bg-overlay</span><span class="semantic-color-hex">#222222</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-canvas);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">bg-canvas</span><span class="semantic-color-hex">neutral-50</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-base);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">bg-base</span><span class="semantic-color-hex">neutral-100</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-surface);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">bg-surface</span><span class="semantic-color-hex">neutral-150</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-elevated);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">bg-elevated</span><span class="semantic-color-hex">neutral-200</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-overlay);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">bg-overlay</span><span class="semantic-color-hex">neutral-250</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-inverse)"></div><span class="semantic-color-name">bg-inverse</span><span class="semantic-color-hex">neutral-950</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-hover);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">bg-hover</span><span class="semantic-color-hex">white 4%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-active);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">bg-active</span><span class="semantic-color-hex">white 8%</span></div>
         <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-selected);border:1px solid var(--color-primary-border)"></div><span class="semantic-color-name">bg-selected</span><span class="semantic-color-hex">iris 12%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-bg-selection);border:1px solid var(--color-primary-border)"></div><span class="semantic-color-name">bg-selection</span><span class="semantic-color-hex">iris 30%</span></div>
       </div>
 
-      <!-- Text -->
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Border</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-subtlest);border:1px solid var(--color-border-default)"></div><span class="semantic-color-name">border-subtlest</span><span class="semantic-color-hex">neutral-200</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-subtle)"></div><span class="semantic-color-name">border-subtle</span><span class="semantic-color-hex">neutral-300</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-default)"></div><span class="semantic-color-name">border-default</span><span class="semantic-color-hex">neutral-350</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-strong)"></div><span class="semantic-color-name">border-strong</span><span class="semantic-color-hex">neutral-450</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-inverse)"></div><span class="semantic-color-name">border-inverse</span><span class="semantic-color-hex">neutral-800</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-focus)"></div><span class="semantic-color-name">border-focus</span><span class="semantic-color-hex">iris-300</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-error)"></div><span class="semantic-color-name">border-error</span><span class="semantic-color-hex">red-500</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-success)"></div><span class="semantic-color-name">border-success</span><span class="semantic-color-hex">green-500</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-border-warning)"></div><span class="semantic-color-name">border-warning</span><span class="semantic-color-hex">#e07c00</span></div>
+      </div>
+
+
+    </div></div>
+
+    <!-- Text + Icon -->
+    <div class="ctab-panel" data-ctab-panel="sc-type">
+    <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:var(--space-6);padding-top:var(--space-4);">
+
       <div class="semantic-color-group">
         <div class="semantic-color-group-title">Text</div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-primary)"></div><span class="semantic-color-name">text-primary</span><span class="semantic-color-hex">#f0f0f0</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-secondary)"></div><span class="semantic-color-name">text-secondary</span><span class="semantic-color-hex">#a0a0a0</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-tertiary)"></div><span class="semantic-color-name">text-tertiary</span><span class="semantic-color-hex">#777777</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-disabled)"></div><span class="semantic-color-name">text-disabled</span><span class="semantic-color-hex">#4a4a4a</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-link)"></div><span class="semantic-color-name">text-link</span><span class="semantic-color-hex">#c0b8fc</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-error)"></div><span class="semantic-color-name">text-error</span><span class="semantic-color-hex">#f87182</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-primary)"></div><span class="semantic-color-name">text-primary</span><span class="semantic-color-hex">neutral-950</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-secondary)"></div><span class="semantic-color-name">text-secondary</span><span class="semantic-color-hex">neutral-700</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-tertiary)"></div><span class="semantic-color-name">text-tertiary</span><span class="semantic-color-hex">neutral-600</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-disabled)"></div><span class="semantic-color-name">text-disabled</span><span class="semantic-color-hex">neutral-450</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-inverse);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">text-inverse</span><span class="semantic-color-hex">neutral-100</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-link)"></div><span class="semantic-color-name">text-link</span><span class="semantic-color-hex">iris-300</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-link-hover)"></div><span class="semantic-color-name">text-link-hover</span><span class="semantic-color-hex">iris-200</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-error)"></div><span class="semantic-color-name">text-error</span><span class="semantic-color-hex">red-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-success)"></div><span class="semantic-color-name">text-success</span><span class="semantic-color-hex">green-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-warning)"></div><span class="semantic-color-name">text-warning</span><span class="semantic-color-hex">amber-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-text-info)"></div><span class="semantic-color-name">text-info</span><span class="semantic-color-hex">blue-400</span></div>
       </div>
 
-      <!-- Primary + Status -->
       <div class="semantic-color-group">
-        <div class="semantic-color-group-title">Primary + Status</div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-bg)"></div><span class="semantic-color-name">primary-bg</span><span class="semantic-color-hex">#5c4dd0</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-bg-hover)"></div><span class="semantic-color-name">primary-bg-hover</span><span class="semantic-color-hex">#6e5fe8</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-success-bg)"></div><span class="semantic-color-name">success-bg</span><span class="semantic-color-hex">#168f42</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-warning-bg)"></div><span class="semantic-color-name">warning-bg</span><span class="semantic-color-hex">#d96010</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-bg)"></div><span class="semantic-color-name">destructive-bg</span><span class="semantic-color-hex">#d31d42</span></div>
-        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-info-bg)"></div><span class="semantic-color-name">info-bg</span><span class="semantic-color-hex">#1f52d4</span></div>
+        <div class="semantic-color-group-title">Icon</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-primary)"></div><span class="semantic-color-name">icon-primary</span><span class="semantic-color-hex">neutral-900</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-secondary)"></div><span class="semantic-color-name">icon-secondary</span><span class="semantic-color-hex">neutral-650</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-tertiary)"></div><span class="semantic-color-name">icon-tertiary</span><span class="semantic-color-hex">neutral-500</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-disabled)"></div><span class="semantic-color-name">icon-disabled</span><span class="semantic-color-hex">neutral-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-inverse);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">icon-inverse</span><span class="semantic-color-hex">neutral-150</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-brand)"></div><span class="semantic-color-name">icon-brand</span><span class="semantic-color-hex">iris-300</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-error)"></div><span class="semantic-color-name">icon-error</span><span class="semantic-color-hex">red-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-success)"></div><span class="semantic-color-name">icon-success</span><span class="semantic-color-hex">green-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-warning)"></div><span class="semantic-color-name">icon-warning</span><span class="semantic-color-hex">amber-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-icon-info)"></div><span class="semantic-color-name">icon-info</span><span class="semantic-color-hex">blue-400</span></div>
       </div>
 
-    </div>
+    </div></div>
 
-    <!-- Background layering demo -->
-    <div style="display:flex;flex-direction:column;gap:var(--space-2);">
-      <div class="section-meta" style="margin-bottom:var(--space-1);">Surface layering</div>
-      <div style="display:flex;gap:var(--space-3);align-items:stretch;">
-        <div class="surface-demo" style="background:var(--color-bg-canvas);flex:1;">
-          <div class="surface-demo-label">canvas</div>
-          <div class="surface-demo-value">#080808</div>
-        </div>
-        <div class="surface-demo" style="background:var(--color-bg-base);flex:1;">
-          <div class="surface-demo-label">base</div>
-          <div class="surface-demo-value">#0f0f0f</div>
-        </div>
-        <div class="surface-demo" style="background:var(--color-bg-surface);flex:1;">
-          <div class="surface-demo-label">surface</div>
-          <div class="surface-demo-value">#141414</div>
-        </div>
-        <div class="surface-demo" style="background:var(--color-bg-elevated);flex:1;">
-          <div class="surface-demo-label">elevated</div>
-          <div class="surface-demo-value">#1a1a1a</div>
-        </div>
-        <div class="surface-demo" style="background:var(--color-bg-overlay);flex:1;">
-          <div class="surface-demo-label">overlay</div>
-          <div class="surface-demo-value">#222222</div>
-        </div>
+    <!-- Primary -->
+    <div class="ctab-panel" data-ctab-panel="sc-primary">
+    <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:var(--space-6);padding-top:var(--space-4);">
+
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Primary</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-bg)"></div><span class="semantic-color-name">primary-bg</span><span class="semantic-color-hex">iris-700</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-bg-hover)"></div><span class="semantic-color-name">primary-bg-hover</span><span class="semantic-color-hex">iris-600</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-bg-active)"></div><span class="semantic-color-name">primary-bg-active</span><span class="semantic-color-hex">iris-800</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-bg-subtle);border:1px solid var(--color-primary-border)"></div><span class="semantic-color-name">primary-bg-subtle</span><span class="semantic-color-hex">iris 12%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-fg);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">primary-fg</span><span class="semantic-color-hex">neutral-1000</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-fg-subtle)"></div><span class="semantic-color-name">primary-fg-subtle</span><span class="semantic-color-hex">iris-300</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-border)"></div><span class="semantic-color-name">primary-border</span><span class="semantic-color-hex">iris-700</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-primary-border-hover)"></div><span class="semantic-color-name">primary-border-hover</span><span class="semantic-color-hex">iris-600</span></div>
       </div>
-    </div>
+
+    </div></div>
+
+    <!-- Status: destructive · success · warning · info -->
+    <div class="ctab-panel" data-ctab-panel="sc-status">
+    <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:var(--space-6);padding-top:var(--space-4);">
+
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Destructive</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-bg)"></div><span class="semantic-color-name">destructive-bg</span><span class="semantic-color-hex">red-600</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-bg-hover)"></div><span class="semantic-color-name">destructive-bg-hover</span><span class="semantic-color-hex">red-500</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-bg-active)"></div><span class="semantic-color-name">destructive-bg-active</span><span class="semantic-color-hex">red-700</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-bg-subtle);border:1px solid var(--color-destructive-border)"></div><span class="semantic-color-name">destructive-bg-subtle</span><span class="semantic-color-hex">red 12%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-fg);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">destructive-fg</span><span class="semantic-color-hex">neutral-1000</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-fg-subtle)"></div><span class="semantic-color-name">destructive-fg-subtle</span><span class="semantic-color-hex">red-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-border)"></div><span class="semantic-color-name">destructive-border</span><span class="semantic-color-hex">red-600</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-destructive-border-hover)"></div><span class="semantic-color-name">destructive-border-hover</span><span class="semantic-color-hex">red-500</span></div>
+      </div>
+
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Success</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-success-bg)"></div><span class="semantic-color-name">success-bg</span><span class="semantic-color-hex">green-600</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-success-bg-subtle);border:1px solid var(--color-success-border)"></div><span class="semantic-color-name">success-bg-subtle</span><span class="semantic-color-hex">green 12%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-success-fg);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">success-fg</span><span class="semantic-color-hex">neutral-1000</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-success-fg-subtle)"></div><span class="semantic-color-name">success-fg-subtle</span><span class="semantic-color-hex">green-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-success-border)"></div><span class="semantic-color-name">success-border</span><span class="semantic-color-hex">green-600</span></div>
+      </div>
+
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Warning</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-warning-bg)"></div><span class="semantic-color-name">warning-bg</span><span class="semantic-color-hex">amber-500</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-warning-bg-subtle);border:1px solid var(--color-warning-border)"></div><span class="semantic-color-name">warning-bg-subtle</span><span class="semantic-color-hex">amber 12%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-warning-fg);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">warning-fg</span><span class="semantic-color-hex">neutral-0</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-warning-fg-subtle)"></div><span class="semantic-color-name">warning-fg-subtle</span><span class="semantic-color-hex">amber-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-warning-border)"></div><span class="semantic-color-name">warning-border</span><span class="semantic-color-hex">amber-500</span></div>
+      </div>
+
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Info</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-info-bg)"></div><span class="semantic-color-name">info-bg</span><span class="semantic-color-hex">blue-600</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-info-bg-subtle);border:1px solid var(--color-info-border)"></div><span class="semantic-color-name">info-bg-subtle</span><span class="semantic-color-hex">blue 12%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-info-fg);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">info-fg</span><span class="semantic-color-hex">neutral-1000</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-info-fg-subtle)"></div><span class="semantic-color-name">info-fg-subtle</span><span class="semantic-color-hex">blue-400</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-info-border)"></div><span class="semantic-color-name">info-border</span><span class="semantic-color-hex">blue-600</span></div>
+      </div>
+
+    </div></div>
+
+    <!-- Neutral + Code -->
+    <div class="ctab-panel" data-ctab-panel="sc-neutral">
+    <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:var(--space-6);padding-top:var(--space-4);">
+
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Neutral</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-bg);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">neutral-bg</span><span class="semantic-color-hex">neutral-200</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-bg-hover);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">neutral-bg-hover</span><span class="semantic-color-hex">neutral-300</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-bg-active);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">neutral-bg-active</span><span class="semantic-color-hex">neutral-350</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-bg-subtle);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">neutral-bg-subtle</span><span class="semantic-color-hex">white 4%</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-fg)"></div><span class="semantic-color-name">neutral-fg</span><span class="semantic-color-hex">neutral-950</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-fg-subtle)"></div><span class="semantic-color-name">neutral-fg-subtle</span><span class="semantic-color-hex">neutral-700</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-border)"></div><span class="semantic-color-name">neutral-border</span><span class="semantic-color-hex">neutral-350</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-neutral-border-hover)"></div><span class="semantic-color-name">neutral-border-hover</span><span class="semantic-color-hex">neutral-500</span></div>
+      </div>
+
+      <div class="semantic-color-group">
+        <div class="semantic-color-group-title">Code</div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-bg);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">code-bg</span><span class="semantic-color-hex">neutral-150</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-bg-block);border:1px solid var(--color-border-subtle)"></div><span class="semantic-color-name">code-bg-block</span><span class="semantic-color-hex">neutral-100</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-border)"></div><span class="semantic-color-name">code-border</span><span class="semantic-color-hex">neutral-250</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-fg)"></div><span class="semantic-color-name">code-fg</span><span class="semantic-color-hex">#d8b4fe</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-fg-keyword)"></div><span class="semantic-color-name">code-fg-keyword</span><span class="semantic-color-hex">#c084fc</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-fg-string)"></div><span class="semantic-color-name">code-fg-string</span><span class="semantic-color-hex">#86efac</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-fg-number)"></div><span class="semantic-color-name">code-fg-number</span><span class="semantic-color-hex">#fcd34d</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-fg-punctuation)"></div><span class="semantic-color-name">code-fg-punctuation</span><span class="semantic-color-hex">neutral-600</span></div>
+        <div class="semantic-color-row"><div class="semantic-color-dot" style="background:var(--color-code-fg-comment)"></div><span class="semantic-color-name">code-fg-comment</span><span class="semantic-color-hex">neutral-550</span></div>
+      </div>
+
+    </div></div>
+
+    </div><!-- /tab wrapper -->
+
   </section>
 
 
@@ -2033,42 +2144,70 @@
       <span class="section-meta">Primitive</span>
     </div>
 
-    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--space-3);">
-      <div class="radius-card" style="border-radius:var(--radius-none);">
-        <div class="radius-box" style="border-radius:var(--radius-none);"></div>
-        <div class="radius-label"><div class="token-label">none</div><div class="token-value">0px</div></div>
+    <div class="carousel-outer" id="carousel-radius">
+      <div class="carousel-track" id="carousel-track-radius" style="gap:var(--space-4);">
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-none);"></div>
+            <div class="radius-label"><div class="token-label">none</div><div class="token-value">0px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-xs);"></div>
+            <div class="radius-label"><div class="token-label">xs</div><div class="token-value">2px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-sm);"></div>
+            <div class="radius-label"><div class="token-label">sm</div><div class="token-value">4px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-md);"></div>
+            <div class="radius-label"><div class="token-label">md</div><div class="token-value">6px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-lg);"></div>
+            <div class="radius-label"><div class="token-label">lg</div><div class="token-value">8px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-xl);"></div>
+            <div class="radius-label"><div class="token-label">xl</div><div class="token-value">12px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-2xl);"></div>
+            <div class="radius-label"><div class="token-label">2xl</div><div class="token-value">16px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-3xl);"></div>
+            <div class="radius-label"><div class="token-label">3xl</div><div class="token-value">24px</div></div>
+          </div>
+        </div>
+        <div class="carousel-slide" style="width:auto;flex-shrink:0;">
+          <div class="radius-card">
+            <div class="radius-box" style="border-radius:var(--radius-full);"></div>
+            <div class="radius-label"><div class="token-label">full</div><div class="token-value">9999px</div></div>
+          </div>
+        </div>
       </div>
-      <div class="radius-card" style="border-radius:var(--radius-xs);">
-        <div class="radius-box" style="border-radius:var(--radius-xs);"></div>
-        <div class="radius-label"><div class="token-label">xs</div><div class="token-value">2px</div></div>
-      </div>
-      <div class="radius-card" style="border-radius:var(--radius-sm);">
-        <div class="radius-box" style="border-radius:var(--radius-sm);"></div>
-        <div class="radius-label"><div class="token-label">sm</div><div class="token-value">4px</div></div>
-      </div>
-      <div class="radius-card" style="border-radius:var(--radius-md);">
-        <div class="radius-box" style="border-radius:var(--radius-md);"></div>
-        <div class="radius-label"><div class="token-label">md</div><div class="token-value">6px</div></div>
-      </div>
-      <div class="radius-card" style="border-radius:var(--radius-lg);">
-        <div class="radius-box" style="border-radius:var(--radius-lg);"></div>
-        <div class="radius-label"><div class="token-label">lg</div><div class="token-value">8px</div></div>
-      </div>
-      <div class="radius-card" style="border-radius:var(--radius-xl);">
-        <div class="radius-box" style="border-radius:var(--radius-xl);"></div>
-        <div class="radius-label"><div class="token-label">xl</div><div class="token-value">12px</div></div>
-      </div>
-      <div class="radius-card" style="border-radius:var(--radius-2xl);">
-        <div class="radius-box" style="border-radius:var(--radius-2xl);"></div>
-        <div class="radius-label"><div class="token-label">2xl</div><div class="token-value">16px</div></div>
-      </div>
-      <div class="radius-card" style="border-radius:var(--radius-3xl);">
-        <div class="radius-box" style="border-radius:var(--radius-3xl);"></div>
-        <div class="radius-label"><div class="token-label">3xl</div><div class="token-value">24px</div></div>
-      </div>
-      <div class="radius-card" style="border-radius:var(--radius-full);">
-        <div class="radius-box" style="border-radius:var(--radius-full);"></div>
-        <div class="radius-label"><div class="token-label">full</div><div class="token-value">9999px</div></div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carousel-radius-prev" aria-label="Previous slide">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m10 4-4 4 4 4"/></svg>
+        </button>
+        <button class="carousel-btn" id="carousel-radius-next" aria-label="Next slide">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 4 4 4-4 4"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -2175,22 +2314,34 @@
     <!-- ── Badges ───────────────────────────────────────────────────────────── -->
     <div>
       <div class="section-meta" style="margin-bottom:var(--space-3);">Badges</div>
-      <div style="background:var(--color-bg-surface);border:1px solid var(--color-border-subtle);border-radius:var(--radius-card-md);padding:var(--spacing-inset-md);display:flex;flex-direction:column;gap:var(--space-3);">
-        <div class="row">
-          <span class="badge badge-neutral"><span class="badge-dot"></span>Neutral</span>
-          <span class="badge badge-primary"><span class="badge-dot"></span>Primary</span>
-          <span class="badge badge-success"><span class="badge-dot"></span>Success</span>
-          <span class="badge badge-warning"><span class="badge-dot"></span>Warning</span>
-          <span class="badge badge-error"><span class="badge-dot"></span>Error</span>
-          <span class="badge badge-info"><span class="badge-dot"></span>Info</span>
+      <div style="background:var(--color-bg-surface);border:1px solid var(--color-border-subtle);border-radius:var(--radius-card-md);padding:var(--spacing-inset-md);display:flex;flex-direction:column;gap:var(--space-4);">
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <div class="token-label" style="color:var(--color-text-disabled);">Small</div>
+          <div class="row" style="align-items:center;">
+            <span class="badge badge-neutral"><span class="badge-dot"></span>Neutral</span>
+            <span class="badge badge-primary"><span class="badge-dot"></span>Primary</span>
+            <span class="badge badge-success"><span class="badge-dot"></span>Live</span>
+            <span class="badge badge-warning"><span class="badge-dot"></span>Building</span>
+            <span class="badge badge-error"><span class="badge-dot"></span>Failed</span>
+            <span class="badge badge-info"><span class="badge-dot"></span>Info</span>
+            <span class="badge badge-neutral">Draft</span>
+            <span class="badge badge-primary">Beta</span>
+            <span class="badge badge-info">v2.4.1</span>
+          </div>
         </div>
-        <div class="row">
-          <span class="badge badge-neutral badge-pill">Draft</span>
-          <span class="badge badge-success badge-pill">Live</span>
-          <span class="badge badge-warning badge-pill">Building</span>
-          <span class="badge badge-error badge-pill">Failed</span>
-          <span class="badge badge-primary badge-pill">Beta</span>
-          <span class="badge badge-info badge-pill">v2.4.1</span>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+          <div class="token-label" style="color:var(--color-text-disabled);">Medium</div>
+          <div class="row" style="align-items:center;">
+            <span class="badge badge-md badge-neutral"><span class="badge-dot"></span>Neutral</span>
+            <span class="badge badge-md badge-primary"><span class="badge-dot"></span>Primary</span>
+            <span class="badge badge-md badge-success"><span class="badge-dot"></span>Live</span>
+            <span class="badge badge-md badge-warning"><span class="badge-dot"></span>Building</span>
+            <span class="badge badge-md badge-error"><span class="badge-dot"></span>Failed</span>
+            <span class="badge badge-md badge-info"><span class="badge-dot"></span>Info</span>
+            <span class="badge badge-md badge-neutral">Draft</span>
+            <span class="badge badge-md badge-primary">Beta</span>
+            <span class="badge badge-md badge-info">v2.4.1</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2232,7 +2383,7 @@
           <p class="card-title">Analytics</p>
           <p class="card-desc">Monitor page views, sessions, and conversion funnels across all your deployments.</p>
           <div class="card-footer">
-            <span class="badge badge-success badge-pill"><span class="badge-dot"></span>Active</span>
+            <span class="badge badge-success"><span class="badge-dot"></span>Active</span>
             <button class="btn btn-ghost btn-sm">View →</button>
           </div>
         </div>
@@ -2240,7 +2391,7 @@
           <p class="card-title">Edge Network</p>
           <p class="card-desc">Deploy to 40+ edge regions globally. Zero cold starts. Automatic failover.</p>
           <div class="card-footer">
-            <span class="badge badge-primary badge-pill">40 regions</span>
+            <span class="badge badge-primary">40 regions</span>
             <button class="btn btn-ghost btn-sm">Configure →</button>
           </div>
         </div>
@@ -2248,7 +2399,7 @@
           <p class="card-title">Build Cache</p>
           <p class="card-desc">Intelligent caching reduces build times by an average of 78% across subsequent deploys.</p>
           <div class="card-footer">
-            <span class="badge badge-warning badge-pill"><span class="badge-dot"></span>Warming</span>
+            <span class="badge badge-warning"><span class="badge-dot"></span>Warming</span>
             <button class="btn btn-ghost btn-sm">Details →</button>
           </div>
         </div>
@@ -2385,7 +2536,7 @@
                 <div class="card-list-sub mono-caption-xs">main · a3f9b21</div>
               </div>
               <div class="card-list-aside">
-                <span class="badge badge-success badge-pill" style="font-size:var(--text-2xs);">Ready</span>
+                <span class="badge badge-success" style="font-size:var(--text-2xs);">Ready</span>
                 <span class="card-list-time">3m</span>
               </div>
             </div>
@@ -2396,7 +2547,7 @@
                 <div class="card-list-sub mono-caption-xs">fix/nav · b7d12ea</div>
               </div>
               <div class="card-list-aside">
-                <span class="badge badge-error badge-pill" style="font-size:var(--text-2xs);">Error</span>
+                <span class="badge badge-error" style="font-size:var(--text-2xs);">Error</span>
                 <span class="card-list-time">42m</span>
               </div>
             </div>
@@ -2407,7 +2558,7 @@
                 <div class="card-list-sub mono-caption-xs">acme.com → CNAME</div>
               </div>
               <div class="card-list-aside">
-                <span class="badge badge-info badge-pill" style="font-size:var(--text-2xs);">DNS</span>
+                <span class="badge badge-info" style="font-size:var(--text-2xs);">DNS</span>
                 <span class="card-list-time">1h</span>
               </div>
             </div>
@@ -2436,7 +2587,7 @@
                 <div class="card-list-sub mono-caption-xs">fix: update edge config</div>
               </div>
               <div class="card-list-aside">
-                <span class="badge badge-success badge-pill"><span class="badge-dot"></span>Ready</span>
+                <span class="badge badge-success"><span class="badge-dot"></span>Ready</span>
                 <span class="card-list-time">3 min ago</span>
               </div>
             </div>
@@ -2446,7 +2597,7 @@
                 <div class="card-list-sub mono-caption-xs">fix: nav overflow on mobile</div>
               </div>
               <div class="card-list-aside">
-                <span class="badge badge-error badge-pill"><span class="badge-dot"></span>Failed</span>
+                <span class="badge badge-error"><span class="badge-dot"></span>Failed</span>
                 <span class="card-list-time">42 min ago</span>
               </div>
             </div>
@@ -2456,7 +2607,7 @@
                 <div class="card-list-sub mono-caption-xs">feat: edge functions v2</div>
               </div>
               <div class="card-list-aside">
-                <span class="badge badge-success badge-pill"><span class="badge-dot"></span>Ready</span>
+                <span class="badge badge-success"><span class="badge-dot"></span>Ready</span>
                 <span class="card-list-time">2 hrs ago</span>
               </div>
             </div>
@@ -2466,7 +2617,7 @@
                 <div class="card-list-sub mono-caption-xs">chore: update edge config</div>
               </div>
               <div class="card-list-aside">
-                <span class="badge badge-warning badge-pill"><span class="badge-dot"></span>Building</span>
+                <span class="badge badge-warning"><span class="badge-dot"></span>Building</span>
                 <span class="card-list-time">just now</span>
               </div>
             </div>
@@ -2514,7 +2665,7 @@
         <div class="card card-pricing featured">
           <div class="card-pricing-badge">
             <span class="token-label" style="margin:0;font-size:var(--text-base);">Pro</span>
-            <span class="badge badge-primary badge-pill">Most popular</span>
+            <span class="badge badge-primary">Most popular</span>
           </div>
           <div class="card-pricing-price">
             <span class="card-pricing-amount">$20</span>
@@ -2893,15 +3044,15 @@
             <div style="font-size:var(--text-md);color:var(--color-text-secondary);">Recent deployments across all branches.</div>
             <div style="margin-top:var(--space-4);display:flex;flex-direction:column;gap:var(--space-2);">
               <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-2) 0;border-bottom:1px solid var(--color-border-subtlest);">
-                <div><span class="badge badge-success badge-pill" style="margin-right:var(--space-2);">Ready</span><span class="mono-caption-sm">a3f9b21 · main</span></div>
+                <div><span class="badge badge-success" style="margin-right:var(--space-2);">Ready</span><span class="mono-caption-sm">a3f9b21 · main</span></div>
                 <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">3 min ago</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-2) 0;border-bottom:1px solid var(--color-border-subtlest);">
-                <div><span class="badge badge-error badge-pill" style="margin-right:var(--space-2);">Failed</span><span class="mono-caption-sm">b7d12ea · fix/nav</span></div>
+                <div><span class="badge badge-error" style="margin-right:var(--space-2);">Failed</span><span class="mono-caption-sm">b7d12ea · fix/nav</span></div>
                 <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">42 min ago</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-2) 0;">
-                <div><span class="badge badge-success badge-pill" style="margin-right:var(--space-2);">Ready</span><span class="mono-caption-sm">c1e89ff · main</span></div>
+                <div><span class="badge badge-success" style="margin-right:var(--space-2);">Ready</span><span class="mono-caption-sm">c1e89ff · main</span></div>
                 <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">2 hrs ago</span>
               </div>
             </div>
@@ -2956,28 +3107,28 @@
             <tr>
               <td><span class="data-table-commit">a3f9b21</span></td>
               <td>main</td>
-              <td><span class="badge badge-success badge-pill"><span class="badge-dot"></span>Ready</span></td>
+              <td><span class="badge badge-success"><span class="badge-dot"></span>Ready</span></td>
               <td><span class="data-table-meta">19.8s</span></td>
               <td><span class="data-table-meta">3 min ago</span></td>
             </tr>
             <tr>
               <td><span class="data-table-commit">b7d12ea</span></td>
               <td>fix/nav-overflow</td>
-              <td><span class="badge badge-error badge-pill"><span class="badge-dot"></span>Failed</span></td>
+              <td><span class="badge badge-error"><span class="badge-dot"></span>Failed</span></td>
               <td><span class="data-table-meta">8.3s</span></td>
               <td><span class="data-table-meta">42 min ago</span></td>
             </tr>
             <tr>
               <td><span class="data-table-commit">c1e89ff</span></td>
               <td>main</td>
-              <td><span class="badge badge-success badge-pill"><span class="badge-dot"></span>Ready</span></td>
+              <td><span class="badge badge-success"><span class="badge-dot"></span>Ready</span></td>
               <td><span class="data-table-meta">22.1s</span></td>
               <td><span class="data-table-meta">2 hrs ago</span></td>
             </tr>
             <tr>
               <td><span class="data-table-commit">d4a77bc</span></td>
               <td>feat/edge-config</td>
-              <td><span class="badge badge-warning badge-pill"><span class="badge-dot"></span>Building</span></td>
+              <td><span class="badge badge-warning"><span class="badge-dot"></span>Building</span></td>
               <td><span class="data-table-meta">—</span></td>
               <td><span class="data-table-meta">just now</span></td>
             </tr>
@@ -3029,35 +3180,35 @@
             <div class="card" style="height:100%;box-sizing:border-box;">
               <p class="card-title">Edge Functions</p>
               <p class="card-desc">Run server-side logic at the edge, closest to your users. Sub-1ms cold start. Deploy globally in seconds.</p>
-              <div class="card-footer"><span class="badge badge-primary badge-pill">New</span><button class="btn btn-ghost btn-sm">Explore →</button></div>
+              <div class="card-footer"><span class="badge badge-primary">New</span><button class="btn btn-ghost btn-sm">Explore →</button></div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="card" style="height:100%;box-sizing:border-box;">
               <p class="card-title">Analytics</p>
               <p class="card-desc">Real-time visitor insights, Core Web Vitals, and conversion tracking, all without cookies or GDPR concerns.</p>
-              <div class="card-footer"><span class="badge badge-success badge-pill"><span class="badge-dot"></span>Active</span><button class="btn btn-ghost btn-sm">View →</button></div>
+              <div class="card-footer"><span class="badge badge-success"><span class="badge-dot"></span>Active</span><button class="btn btn-ghost btn-sm">View →</button></div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="card" style="height:100%;box-sizing:border-box;">
               <p class="card-title">Image Optimization</p>
               <p class="card-desc">Automatic WebP/AVIF conversion, lazy loading, and responsive sizing. 60–80% smaller payloads on average.</p>
-              <div class="card-footer"><span class="badge badge-info badge-pill">Auto</span><button class="btn btn-ghost btn-sm">Configure →</button></div>
+              <div class="card-footer"><span class="badge badge-info">Auto</span><button class="btn btn-ghost btn-sm">Configure →</button></div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="card" style="height:100%;box-sizing:border-box;">
               <p class="card-title">Build Cache</p>
               <p class="card-desc">Intelligent remote caching speeds up subsequent builds by an average of 78%. Works across team members.</p>
-              <div class="card-footer"><span class="badge badge-warning badge-pill"><span class="badge-dot"></span>Warming</span><button class="btn btn-ghost btn-sm">Details →</button></div>
+              <div class="card-footer"><span class="badge badge-warning"><span class="badge-dot"></span>Warming</span><button class="btn btn-ghost btn-sm">Details →</button></div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="card" style="height:100%;box-sizing:border-box;">
               <p class="card-title">Deployments API</p>
               <p class="card-desc">Trigger builds, read logs, manage domains, and create preview environments programmatically via REST.</p>
-              <div class="card-footer"><span class="badge badge-neutral badge-pill">v2</span><button class="btn btn-ghost btn-sm">API Ref →</button></div>
+              <div class="card-footer"><span class="badge badge-neutral">v2</span><button class="btn btn-ghost btn-sm">API Ref →</button></div>
             </div>
           </div>
         </div>
@@ -3178,7 +3329,7 @@
             <div style="font-size:var(--text-2xs);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:var(--space-1);">Project</div>
             <div style="font-size:var(--text-xl);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-tight);">acme-dashboard</div>
           </div>
-          <span class="badge badge-success badge-pill"><span class="badge-dot"></span>Production ready</span>
+          <span class="badge badge-success"><span class="badge-dot"></span>Production ready</span>
         </div>
         <div class="stat-grid">
           <div class="stat-card">
@@ -3203,7 +3354,7 @@
             <div style="font-size:var(--text-md);font-weight:var(--weight-medium);margin-bottom:var(--space-1);">main · a3f9b21</div>
             <div class="mono-caption-sm" style="color:var(--color-text-tertiary);">fix: update edge config</div>
             <div style="margin-top:var(--space-3);display:flex;align-items:center;justify-content:space-between;">
-              <span class="badge badge-success badge-pill"><span class="badge-dot"></span>Ready</span>
+              <span class="badge badge-success"><span class="badge-dot"></span>Ready</span>
               <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">3 min ago</span>
             </div>
           </div>
@@ -3212,7 +3363,7 @@
             <div style="font-size:var(--text-md);font-weight:var(--weight-medium);color:var(--color-text-link);margin-bottom:var(--space-1);">acme.vercel.app</div>
             <div class="mono-caption-sm" style="color:var(--color-text-tertiary);">acme.com → CNAME</div>
             <div style="margin-top:var(--space-3);display:flex;align-items:center;justify-content:space-between;">
-              <span class="badge badge-success badge-pill">SSL Active</span>
+              <span class="badge badge-success">SSL Active</span>
               <button class="btn btn-ghost btn-sm" style="font-size:var(--text-xs);">Manage →</button>
             </div>
           </div>
@@ -3624,16 +3775,24 @@
     if (!track || !slides.length) return;
 
     let current = 0;
-    const visibleCount = 3;
+    const gap = parseFloat(getComputedStyle(track).gap) || 12;
+
+    function getVisibleCount() {
+      const trackW = track.offsetWidth;
+      const slideW = slides[0].offsetWidth + gap;
+      return Math.max(1, Math.floor(trackW / slideW));
+    }
 
     function updateButtons() {
+      const vc = getVisibleCount();
       if (prevBtn) prevBtn.disabled = current === 0;
-      if (nextBtn) nextBtn.disabled = current >= slides.length - visibleCount;
+      if (nextBtn) nextBtn.disabled = current >= slides.length - vc;
     }
 
     function goTo(index) {
-      current = Math.max(0, Math.min(index, slides.length - visibleCount));
-      const slideWidth = slides[0].offsetWidth + 12; // 12px = var(--space-3)
+      const vc = getVisibleCount();
+      current = Math.max(0, Math.min(index, slides.length - vc));
+      const slideWidth = slides[0].offsetWidth + gap;
       track.scrollLeft = current * slideWidth;
       updateButtons();
     }
@@ -3643,7 +3802,7 @@
 
     // Sync current index when user scroll-snaps manually
     track.addEventListener('scroll', () => {
-      const slideWidth = slides[0].offsetWidth + 12;
+      const slideWidth = slides[0].offsetWidth + gap;
       current = Math.round(track.scrollLeft / slideWidth);
       updateButtons();
     });
@@ -4174,23 +4333,23 @@
     // ── Scrubber column highlight (drawn BEFORE candles so it sits behind them)
     h += `<rect id="cc-hl"
       x="0" y="${pT}" width="${gw.toFixed(1)}" height="${ph}"
-      fill="var(--color-bg-active)" rx="2"
+      fill="var(--color-bg-active)" rx="0"
       style="display:none;pointer-events:none"/>`;
 
     // Candles
     candles.forEach((c,i) => {
       const cx   = pL + i*gw + gw/2;
       const bull = c.c >= c.o;
-      const col  = bull ? C.s3 : C.err;
+      const col  = bull ? 'var(--color-success-fg-subtle)' : 'var(--color-destructive-fg-subtle)';
 
       h += `<line x1="${cx.toFixed(1)}" y1="${cpy(c.h).toFixed(1)}" x2="${cx.toFixed(1)}" y2="${cpy(c.l).toFixed(1)}"
-        stroke="${col}" stroke-width="1.5" stroke-linecap="round"/>`;
+        style="stroke:${col};stroke-width:1.5;stroke-linecap:butt;"/>`;
 
       const bTop = cpy(Math.max(c.o,c.c));
       const bBot = cpy(Math.min(c.o,c.c));
       const bH   = Math.max(2, bBot-bTop);
       h += `<rect x="${(cx-bw/2).toFixed(1)}" y="${bTop.toFixed(1)}"
-        width="${bw.toFixed(1)}" height="${bH.toFixed(1)}" rx="2"
+        width="${bw.toFixed(1)}" height="${bH.toFixed(1)}" rx="0"
         style="fill:${col};pointer-events:none"/>`;
 
       if (i%5===0 || i===n-1)
@@ -4226,7 +4385,7 @@
       const c    = candles[idx];
       const cx   = pL + idx*gw + gw/2;
       const bull = c.c >= c.o;
-      const col  = bull ? C.s3 : C.err;
+      const col  = bull ? 'var(--color-success-fg-subtle)' : 'var(--color-destructive-fg-subtle)';
 
       // Column highlight
       highlight.setAttribute('x', (pL + idx*gw).toFixed(1));
